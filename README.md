@@ -1,5 +1,5 @@
 # ProjectCS
-Group members:
-  Nikodem Kropielnicki
-  Maciej Stawiarz
-  Adrian Piątek
+Group members:\
+  Nikodem Kropielnicki\
+  Maciej Stawiarz\
+  Adrian Piątek\
