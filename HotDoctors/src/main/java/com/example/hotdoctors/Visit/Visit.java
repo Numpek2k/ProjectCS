@@ -35,15 +35,4 @@ public class Visit {
         this.h_start = h_start;
         this.date = date;
     }
-
-
-    public void setId(int id) { this.id = id; }
-
-    public void setId_doctor(int id_doctor) { this.id_doctor = id_doctor; }
-
-    public void setId_patient(int id_patient) { this.id_patient = id_patient; }
-
-    public void setH_start(int h_start) { this.h_start = h_start; }
-
-    public void setDate(String date) { this.date = date; }
 }

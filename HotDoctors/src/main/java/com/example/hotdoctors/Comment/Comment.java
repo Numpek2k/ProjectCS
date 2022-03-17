@@ -36,16 +36,4 @@ public class Comment {
         this.id_patient = id_patient;
         this.date = date;
     }
-
-    public void setId(int id) { this.id = id; }
-
-    public void setContent(String content) { this.content = content; }
-
-    public void setRating(double rating) { this.rating = rating; }
-
-    public void setId_doctor(int id_doctor) { this.id_doctor = id_doctor; }
-
-    public void setId_patient(int id_patient) { this.id_patient = id_patient; }
-
-    public void setDate(String date) { this.date = date; }
 }

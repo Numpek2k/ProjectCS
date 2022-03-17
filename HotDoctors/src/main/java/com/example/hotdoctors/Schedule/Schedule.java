@@ -39,14 +39,4 @@ public class Schedule {
         this.h_end = h_end;
         this.user = user;
     }
-
-    public void setId(int id) { this.id = id; }
-
-    public void setDay(String day) { this.day = day; }
-
-    public void setStart_h(int h_start) { this.h_start = h_start; }
-
-    public void setEnd_h(int h_end) { this.h_end = h_end; }
-
-    public void setUser(User user) { this.user = user; }
 }
