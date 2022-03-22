@@ -1,5 +1,4 @@
-package com.example.hotdoctors.Schedule;
-
+package com.example.hotdoctors.Message;
 
 import com.example.hotdoctors.Users.users.Users;
 import lombok.AllArgsConstructor;
@@ -8,31 +7,36 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.time.DayOfWeek;
+import java.util.Date;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Schedule {
+public class Message {
+
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "genSchedule"
+            generator = "genMessage"
     )
     @SequenceGenerator(
-            name = "genSchedule",
+            name = "genMessage",
             allocationSize = 1
     )
     Integer id;
 
     @NotBlank
-    DayOfWeek day;
-    Integer h_start;
-    Integer h_end;
+    String content;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    Date date = new Date();
 
     @ManyToOne
-    @JoinColumn(name = "idUser")
-    Users users;
+    @JoinColumn(name = "id_who")
+    Users idWho;
 
+    @ManyToOne
+    @JoinColumn(name = "id_whom")
+    Users idWhom;
 }

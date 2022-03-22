@@ -1,6 +1,5 @@
-package com.example.hotdoctors.User;
+package com.example.hotdoctors.Users.users;
 
-import com.example.hotdoctors.User.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
