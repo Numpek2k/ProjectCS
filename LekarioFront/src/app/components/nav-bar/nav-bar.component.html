@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand fs-2" href="#">Lekario</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <div *ngIf="!isLoggedIn; else loggedOut" class="navbar-nav">
+          <a class="nav-link" href="#">Register</a>
+          <a class="nav-link" href="#">Login</a>
+        </div>
+        <ng-template #loggedOut>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">
+              My account
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#">Appointments</a></li>
+              <li><a class="dropdown-item" href="#">Chat</a></li>
+              <li><a class="dropdown-item" href="#">Logout</a></li>
+            </ul>
+          </li>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</nav>
