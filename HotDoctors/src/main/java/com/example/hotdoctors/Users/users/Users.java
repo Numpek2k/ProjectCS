@@ -46,6 +46,7 @@ public class Users {
     @NotBlank
     String password;
 
+    @JsonIgnore
     @OneToOne( mappedBy = "users",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
@@ -64,21 +65,25 @@ public class Users {
             fetch = FetchType.LAZY)
     List<Message> followers;
 
+    @JsonIgnore
     @OneToMany( mappedBy = "users",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     List<Schedule> schedule;
 
+    @JsonIgnore
     @OneToMany( mappedBy = "idDoctor",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     List<Visit> visitsDoctor;
 
+    @JsonIgnore
     @OneToMany( mappedBy = "idPatient",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     List<Visit> visitsPatient;
 
+    @JsonIgnore
     @OneToMany( mappedBy = "idDoctor",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
