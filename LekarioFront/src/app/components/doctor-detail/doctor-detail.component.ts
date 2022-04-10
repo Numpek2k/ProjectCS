@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DoctorDetailComponent implements OnInit {
 
+  card = '';
+
   constructor() { }
 
   ngOnInit(): void {
