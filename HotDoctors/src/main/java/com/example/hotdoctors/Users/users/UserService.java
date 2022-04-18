@@ -1,34 +1,18 @@
 package com.example.hotdoctors.Users.users;
 
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.example.hotdoctors.Users.profession.Profession;
 
 import java.util.List;
 
-@Service
-@AllArgsConstructor
-public class UserService {
+public interface UserService {
 
-    private final UserRepository userRepository;
+    void saveUser(Users user);
+    void saveProfession(Profession profession);
 
+    void deleteUser(Integer userId);
+    void deleteProfession(Integer profId);
 
-    public void registerUser(Users user) {
-
-        userRepository.save(user);
-    }
-
-    public void deleteUser(Integer id) {
-
-        userRepository.deleteById(id);
-    }
-
-    public Users findUserById(Integer id) {
-
-        return userRepository.findById(id).orElseThrow();
-    }
-
-    public List<Users> findAllUsers() {
-
-        return userRepository.findAll();
-    }
+    Users findUserById(Integer userId);
+    List<Users> findAllUsers();
+    void addProfToUser(Integer userId, String profName);
 }

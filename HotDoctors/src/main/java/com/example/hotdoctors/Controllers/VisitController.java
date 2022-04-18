@@ -1,6 +1,6 @@
 package com.example.hotdoctors.Controllers;
 
-import com.example.hotdoctors.Visit.VisitService;
+import com.example.hotdoctors.Visit.VisitServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/visit")
 public class VisitController {
 
-    private final VisitService visitService;
+    private final VisitServiceImpl visitServiceImpl;
 
 
 }

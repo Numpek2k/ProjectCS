@@ -1,11 +1,11 @@
 package com.example.hotdoctors.Controllers;
 
-import com.example.hotdoctors.Users.users.UserService;
+import com.example.hotdoctors.Users.profession.Profession;
+import com.example.hotdoctors.Users.users.UserServiceImpl;
 import com.example.hotdoctors.Users.users.Users;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,19 +14,33 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
 
 
-    @GetMapping("/register")
-    public void registerUser(Users user) { userService.registerUser(user); }
+    @PostMapping("/save_user")
+    public void saveUser(Users user) { userServiceImpl.saveUser(user); }
 
-    @GetMapping("/delete")
-    public void deleteUser(Integer id) { userService.deleteUser(id); }
+    @PostMapping("/save_prof")
+    public void saveProfession(Profession profession) { userServiceImpl.saveProfession(profession); }
+
+
+
+
+
+    @DeleteMapping("/delete_user")
+    public void deleteUser(Integer id) { userServiceImpl.deleteUser(id); }
+
+    @DeleteMapping ("/delete_prof")
+    public void deleteProfession(Integer id) { userServiceImpl.deleteProfession(id); }
+
+
+
+
 
     @GetMapping("/findUser")
-    public Users findUser(Integer id) { return userService.findUserById(id); }
+    public Users findUser(Integer id) { return userServiceImpl.findUserById(id); }
 
     @GetMapping("/findUserAll")
-    public List<Users> findUserAll() { return userService.findAllUsers(); }
+    public List<Users> findUserAll() { return userServiceImpl.findAllUsers(); }
 
 }

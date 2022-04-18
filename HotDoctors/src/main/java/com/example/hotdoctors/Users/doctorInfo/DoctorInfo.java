@@ -1,17 +1,20 @@
-package com.example.hotdoctors.Users.userInfo;
+package com.example.hotdoctors.Users.doctorInfo;
 
+import com.example.hotdoctors.Users.profession.Profession;
 import com.example.hotdoctors.Users.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class UserInfo {
+public class DoctorInfo {
 
     @Id
     @GeneratedValue(
@@ -24,9 +27,13 @@ public class UserInfo {
     )
     Integer id;
 
-    String profession;
+    @NotBlank
+    @ManyToMany
+    List<Profession> profession;
     String imagePath;
     String description;
+
+    @NotBlank
     String address;
 
     @OneToOne

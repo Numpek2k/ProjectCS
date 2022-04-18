@@ -3,7 +3,7 @@ package com.example.hotdoctors.Users.users;
 import com.example.hotdoctors.Comment.Comment;
 import com.example.hotdoctors.Message.Message;
 import com.example.hotdoctors.Schedule.Schedule;
-import com.example.hotdoctors.Users.userInfo.UserInfo;
+import com.example.hotdoctors.Users.doctorInfo.DoctorInfo;
 import com.example.hotdoctors.Visit.Visit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -46,12 +46,15 @@ public class Users {
     @NotBlank
     String password;
 
+    @NotBlank
+    Enum<UserType> role;
+
     @JsonIgnore
     @OneToOne( mappedBy = "users",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    UserInfo userInfo;
+    DoctorInfo doctorInfo;
 
     @JsonIgnore
     @OneToMany( mappedBy = "idWho",
@@ -93,4 +96,8 @@ public class Users {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     List<Comment> commentPatient;
+}
+
+enum UserType {
+    PATIENT, DOCTOR, ADMIN
 }
