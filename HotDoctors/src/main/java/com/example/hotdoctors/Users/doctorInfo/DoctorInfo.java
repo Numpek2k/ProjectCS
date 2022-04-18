@@ -30,7 +30,9 @@ public class DoctorInfo {
     @NotBlank
     @ManyToMany
     List<Profession> profession;
+
     String imagePath;
+
     String description;
 
     @NotBlank
