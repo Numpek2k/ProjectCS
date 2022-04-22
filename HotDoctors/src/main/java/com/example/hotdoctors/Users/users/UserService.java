@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface UserService {
 
-    void saveUser(Users user);
-    void saveProfession(Profession profession);
+    Users saveUser(Users user);
+    Profession saveProfession(Profession profession);
 
     void deleteUser(Integer userId);
     void deleteProfession(Integer profId);

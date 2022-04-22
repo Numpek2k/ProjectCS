@@ -6,7 +6,9 @@ import com.example.hotdoctors.Users.users.Users;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -17,30 +19,45 @@ public class UserController {
     private final UserServiceImpl userServiceImpl;
 
 
-    @PostMapping("/save_user")
-    public void saveUser(Users user) { userServiceImpl.saveUser(user); }
+    @PostMapping("/save")
+    public ResponseEntity<Users> saveUser(@RequestBody Users user) {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/save").toUriString());
+        return ResponseEntity.created(uri).body(userServiceImpl.saveUser(user));
+    }
 
-    @PostMapping("/save_prof")
-    public void saveProfession(Profession profession) { userServiceImpl.saveProfession(profession); }
+    @PostMapping("/prof/save")
+    public ResponseEntity<Profession> saveProfession(@RequestBody Profession profession) {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/prof/save").toUriString());
+        return ResponseEntity.created(uri).body(userServiceImpl.saveProfession(profession));
+    }
+
+    @PostMapping("/prof/add")
+    public ResponseEntity<?> addProfToUser(@RequestParam Integer userId, @RequestParam String profName) {
+        userServiceImpl.addProfToUser(userId, profName);
+        return ResponseEntity.ok().build();
+    }
 
 
 
 
-
-    @DeleteMapping("/delete_user")
+    @DeleteMapping("/delete")
     public void deleteUser(Integer id) { userServiceImpl.deleteUser(id); }
 
-    @DeleteMapping ("/delete_prof")
+    @DeleteMapping ("/prof/delete")
     public void deleteProfession(Integer id) { userServiceImpl.deleteProfession(id); }
 
 
 
 
 
-    @GetMapping("/findUser")
-    public Users findUser(Integer id) { return userServiceImpl.findUserById(id); }
+    @GetMapping("/find")
+    public ResponseEntity<Users> findUser(Integer id) {
+        return ResponseEntity.ok().body(userServiceImpl.findUserById(id));
+    }
 
-    @GetMapping("/findUserAll")
-    public List<Users> findUserAll() { return userServiceImpl.findAllUsers(); }
+    @GetMapping("/find/all")
+    public ResponseEntity<List<Users>> findUserAll() {
+        return ResponseEntity.ok().body(userServiceImpl.findAllUsers());
+    }
 
 }

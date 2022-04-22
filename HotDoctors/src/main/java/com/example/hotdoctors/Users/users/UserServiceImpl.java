@@ -16,13 +16,13 @@ public class UserServiceImpl implements UserService {
     private final ProfessionRepository profRepository;
 
     @Override
-    public void saveUser(Users user) {
-        userRepository.save(user);
+    public Users saveUser(Users user) {
+        return userRepository.save(user);
     }
 
     @Override
-    public void saveProfession(Profession profession) {
-        profRepository.save(profession);
+    public Profession saveProfession(Profession profession) {
+        return profRepository.save(profession);
     }
 
     @Override
