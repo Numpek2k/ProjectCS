@@ -9,10 +9,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,6 +22,22 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class Users {
+
+    public Users (String name, String surname, String email, String password, UserType role) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        following = new ArrayList<>();
+        followers = new ArrayList<>();
+        schedule = new ArrayList<>();
+        visitsDoctor = new ArrayList<>();
+        visitsPatient = new ArrayList<>();
+        commentDoctor = new ArrayList<>();
+        commentPatient = new ArrayList<>();
+    }
+
 
     @Id
     @GeneratedValue(
@@ -46,7 +64,6 @@ public class Users {
     @NotBlank
     String password;
 
-    @NotBlank
     Enum<UserType> role;
 
     @JsonIgnore
@@ -96,8 +113,4 @@ public class Users {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     List<Comment> commentPatient;
-}
-
-enum UserType {
-    PATIENT, DOCTOR, ADMIN
 }

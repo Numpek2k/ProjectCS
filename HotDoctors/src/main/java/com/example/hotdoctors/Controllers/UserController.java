@@ -13,13 +13,12 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/user")
 public class UserController {
 
     private final UserServiceImpl userServiceImpl;
 
 
-    @PostMapping("/save")
+    @PostMapping("/user/save")
     public ResponseEntity<Users> saveUser(@RequestBody Users user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/save").toUriString());
         return ResponseEntity.created(uri).body(userServiceImpl.saveUser(user));
@@ -40,7 +39,7 @@ public class UserController {
 
 
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/user/delete")
     public void deleteUser(Integer id) { userServiceImpl.deleteUser(id); }
 
     @DeleteMapping ("/prof/delete")
@@ -50,14 +49,19 @@ public class UserController {
 
 
 
-    @GetMapping("/find")
+    @GetMapping("/user/find")
     public ResponseEntity<Users> findUser(Integer id) {
         return ResponseEntity.ok().body(userServiceImpl.findUserById(id));
     }
 
-    @GetMapping("/find/all")
+    @GetMapping("/user/find/all")
     public ResponseEntity<List<Users>> findUserAll() {
         return ResponseEntity.ok().body(userServiceImpl.findAllUsers());
+    }
+
+    @GetMapping("/prof/find/all")
+    public ResponseEntity<List<Profession>> findProfAll() {
+        return ResponseEntity.ok().body(userServiceImpl.findAllProf());
     }
 
 }

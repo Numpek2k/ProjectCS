@@ -14,5 +14,9 @@ public interface UserService {
 
     Users findUserById(Integer userId);
     List<Users> findAllUsers();
+
+    List<Profession> findAllProf();
+
+
     void addProfToUser(Integer userId, String profName);
 }

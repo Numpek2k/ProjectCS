@@ -46,6 +46,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<Profession> findAllProf() {
+        return profRepository.findAll();
+    }
+
+    @Override
     public void addProfToUser(Integer userId, String profName) {
         Users user = findUserById(userId);
         Profession prof = profRepository.findProfByName(profName);
