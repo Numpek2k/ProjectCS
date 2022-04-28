@@ -4,113 +4,96 @@ import com.example.hotdoctors.Comment.Comment;
 import com.example.hotdoctors.Message.Message;
 import com.example.hotdoctors.Schedule.Schedule;
 import com.example.hotdoctors.Users.doctorInfo.DoctorInfo;
+import com.example.hotdoctors.Users.users.Role.UserRole;
 import com.example.hotdoctors.Visit.Visit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@Entity @AllArgsConstructor @NoArgsConstructor @Data
 public class Users {
 
-    public Users (String name, String surname, String email, String password, UserType role) {
+    public Users (String name, String surname, String email, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.role = role;
-        following = new ArrayList<>();
-        followers = new ArrayList<>();
-        schedule = new ArrayList<>();
-        visitsDoctor = new ArrayList<>();
-        visitsPatient = new ArrayList<>();
-        commentDoctor = new ArrayList<>();
-        commentPatient = new ArrayList<>();
     }
 
-
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "genUser"
-    )
-    @SequenceGenerator(
-            name = "genUser",
-            allocationSize = 1
-    )
-    Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     @NotBlank
-    String name;
+    private String name;
 
     @NotBlank
-    String surname;
+    private String surname;
 
     @NotBlank
     @Email
     @Column(unique = true)
-    String email;
+    private String email;
 
     @NotBlank
-    String password;
+    private String password;
 
-    Enum<UserType> role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<UserRole> roles = new ArrayList<>();
 
     @JsonIgnore
     @OneToOne( mappedBy = "users",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    DoctorInfo doctorInfo;
+    private DoctorInfo doctorInfo;
 
     @JsonIgnore
     @OneToMany( mappedBy = "idWho",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    List<Message> following;
+    private List<Message> following = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany( mappedBy = "idWhom",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    List<Message> followers;
+    private List<Message> followers = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany( mappedBy = "users",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    List<Schedule> schedule;
+    private List<Schedule> schedule = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany( mappedBy = "idDoctor",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    List<Visit> visitsDoctor;
+    private List<Visit> visitsDoctor = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany( mappedBy = "idPatient",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    List<Visit> visitsPatient;
+    private List<Visit> visitsPatient = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany( mappedBy = "idDoctor",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    List<Comment> commentDoctor;
+    private List<Comment> commentDoctor = new ArrayList<>();
 
     @OneToMany( mappedBy = "idPatient",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    List<Comment> commentPatient;
+    private List<Comment> commentPatient = new ArrayList<>();
 }

@@ -9,34 +9,24 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@Entity @AllArgsConstructor @NoArgsConstructor @Data
 public class Message {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "genMessage"
-    )
-    @SequenceGenerator(
-            name = "genMessage",
-            allocationSize = 1
-    )
-    Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     @NotBlank
-    String content;
+    private String content;
 
     @Temporal(TemporalType.TIMESTAMP)
-    Date date = new Date();
+    private Date date = new Date();
 
     @ManyToOne
     @JoinColumn(name = "id_who")
-    Users idWho;
+    private Users idWho;
 
     @ManyToOne
     @JoinColumn(name = "id_whom")
-    Users idWhom;
+    private Users idWhom;
 }

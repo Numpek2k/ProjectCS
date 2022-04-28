@@ -11,12 +11,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-@RestController
-@AllArgsConstructor
+@RestController @AllArgsConstructor
 public class UserController {
 
     private final UserServiceImpl userServiceImpl;
-
 
     @PostMapping("/user/save")
     public ResponseEntity<Users> saveUser(@RequestBody Users user) {

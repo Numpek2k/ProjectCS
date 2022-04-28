@@ -8,37 +8,27 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+@Entity @NoArgsConstructor @AllArgsConstructor @Data
 public class DoctorInfo {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "genUserInfo"
-    )
-    @SequenceGenerator(
-            name = "genUserInfo",
-            allocationSize = 1
-    )
-    Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     @ManyToMany
-    List<Profession> profession;
+    private List<Profession> profession = new ArrayList<>();
 
-    String imagePath;
+    private String imagePath;
 
-    String description;
+    private String description;
 
     @NotBlank
-    String address;
+    private String address;
 
     @OneToOne
     @JoinColumn(name = "idUser")
-    Users users;
+    private Users users;
 }

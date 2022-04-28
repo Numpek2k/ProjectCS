@@ -15,26 +15,21 @@ import java.util.Date;
 public class Comment {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "genComment"
-    )
-    @SequenceGenerator(
-            name = "genComment",
-            allocationSize = 1
-    )
-    Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-    String content;
-    Integer rating;
-    Date date = new Date();
+    private String content;
+
+    private Integer rating;
+
+    private Date date = new Date();
 
     @ManyToOne
     @JoinColumn(name = "idDoctor")
-    Users idDoctor;
+    private Users idDoctor;
 
     @ManyToOne
     @JoinColumn(name = "idPatient")
-    Users idPatient;
+    private Users idPatient;
 
 }

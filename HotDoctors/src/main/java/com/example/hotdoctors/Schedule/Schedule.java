@@ -16,23 +16,18 @@ import java.time.DayOfWeek;
 @Data
 public class Schedule {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "genSchedule"
-    )
-    @SequenceGenerator(
-            name = "genSchedule",
-            allocationSize = 1
-    )
-    Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     @NotBlank
-    DayOfWeek day;
-    Integer h_start;
-    Integer h_end;
+    private DayOfWeek day;
+
+    private Integer h_start;
+
+    private Integer h_end;
 
     @ManyToOne
     @JoinColumn(name = "idUser")
-    Users users;
+    private Users users;
 
 }

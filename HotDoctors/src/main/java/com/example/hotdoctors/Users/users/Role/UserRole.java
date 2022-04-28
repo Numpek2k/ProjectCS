@@ -1,19 +1,16 @@
-package com.example.hotdoctors.Users.profession;
+package com.example.hotdoctors.Users.users.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 @Entity @AllArgsConstructor @NoArgsConstructor @Data
-public class Profession {
+public class UserRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
-    @NotBlank
     private String name;
 }
