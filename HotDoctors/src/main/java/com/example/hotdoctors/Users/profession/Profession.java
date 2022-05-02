@@ -20,6 +20,7 @@ public class Profession {
     private Integer id;
 
     @NotBlank
+    @Column(unique = true)
     private String name;
 
     public Profession(String name) { this.name = name; }
