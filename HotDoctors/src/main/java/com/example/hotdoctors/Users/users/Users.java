@@ -4,6 +4,7 @@ import com.example.hotdoctors.Comment.Comment;
 import com.example.hotdoctors.Message.Message;
 import com.example.hotdoctors.Schedule.Schedule;
 import com.example.hotdoctors.Users.doctorInfo.DoctorInfo;
+import com.example.hotdoctors.Users.role.Role;
 import com.example.hotdoctors.Visit.Visit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,15 @@ public class Users {
     @NotBlank
     private String password;
 
+
+
+
+    @JsonIgnore
+    @OneToOne( mappedBy = "users",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private Role role;
 
     @JsonIgnore
     @OneToOne( mappedBy = "users",

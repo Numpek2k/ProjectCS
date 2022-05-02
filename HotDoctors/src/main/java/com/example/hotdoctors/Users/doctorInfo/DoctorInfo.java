@@ -1,6 +1,7 @@
 package com.example.hotdoctors.Users.doctorInfo;
 
 import com.example.hotdoctors.Users.profession.Profession;
+import com.example.hotdoctors.Users.role.Role;
 import com.example.hotdoctors.Users.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,9 +19,6 @@ public class DoctorInfo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToMany
-    private List<Profession> profession = new ArrayList<>();
-
     private String imagePath;
 
     private String description;
@@ -31,4 +29,11 @@ public class DoctorInfo {
     @OneToOne
     @JoinColumn(name = "idUser")
     private Users users;
+
+    @ManyToMany
+    @JoinTable(
+            name = "doctor_profession",
+            joinColumns = @JoinColumn(name = "doctor_id"),
+            inverseJoinColumns = @JoinColumn(name = "profession_id"))
+    private List<Profession> professionList = new ArrayList<>();
 }

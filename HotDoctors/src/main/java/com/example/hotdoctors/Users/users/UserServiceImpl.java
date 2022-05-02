@@ -1,5 +1,6 @@
 package com.example.hotdoctors.Users.users;
 
+import com.example.hotdoctors.Users.doctorInfo.DoctorInfoRepository;
 import com.example.hotdoctors.Users.profession.Profession;
 import com.example.hotdoctors.Users.profession.ProfessionRepository;
 import lombok.AllArgsConstructor;
@@ -75,6 +76,6 @@ public class UserServiceImpl implements UserService//, UserDetailsService
     public void addProfToUser(Integer userId, String profName) {
         Users user = findUserById(userId);
         Profession prof = profRepository.findProfByName(profName);
-        user.getDoctorInfo().getProfession().add(prof);
+        user.getDoctorInfo().getProfessionList().add(prof);
     }
 }

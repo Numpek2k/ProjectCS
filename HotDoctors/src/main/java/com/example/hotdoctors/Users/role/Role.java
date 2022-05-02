@@ -1,14 +1,14 @@
 package com.example.hotdoctors.Users.role;
 
+import com.example.hotdoctors.Users.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity @NoArgsConstructor @AllArgsConstructor @Data
 public class Role {
@@ -19,4 +19,8 @@ public class Role {
 
     @NotBlank
     private String name;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private Users users;
 }

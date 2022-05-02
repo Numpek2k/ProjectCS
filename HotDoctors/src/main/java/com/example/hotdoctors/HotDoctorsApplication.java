@@ -20,7 +20,11 @@ public class HotDoctorsApplication {
         return new BCryptPasswordEncoder();
     }
 
-
-
+    @Bean
+    CommandLineRunner run (UserService userService) {
+        return args -> {
+            userService.saveProfession(new Profession("DENTYSTA"));
+        };
+    }
 
 }
