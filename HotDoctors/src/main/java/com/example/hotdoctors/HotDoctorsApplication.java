@@ -15,11 +15,12 @@ public class HotDoctorsApplication {
     public static void main(String[] args) {
         SpringApplication.run(HotDoctorsApplication.class, args);
     }
-
-
     @Bean
     BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
+
 
 }
