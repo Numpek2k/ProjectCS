@@ -4,7 +4,6 @@ import com.example.hotdoctors.Comment.Comment;
 import com.example.hotdoctors.Message.Message;
 import com.example.hotdoctors.Schedule.Schedule;
 import com.example.hotdoctors.Users.doctorInfo.DoctorInfo;
-import com.example.hotdoctors.Users.users.Role.UserRole;
 import com.example.hotdoctors.Visit.Visit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -15,18 +14,10 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity @AllArgsConstructor @NoArgsConstructor @Data
 public class Users {
-
-    public Users (String name, String surname, String email, String password) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,8 +37,6 @@ public class Users {
     @NotBlank
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<UserRole> roles = new ArrayList<>();
 
     @JsonIgnore
     @OneToOne( mappedBy = "users",

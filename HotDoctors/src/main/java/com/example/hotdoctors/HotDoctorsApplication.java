@@ -22,25 +22,4 @@ public class HotDoctorsApplication {
         return new BCryptPasswordEncoder();
     }
 
-
-
-
-
-    @Bean
-    CommandLineRunner runner(UserService userService) {
-        return args -> {
-            userService.saveProfession(new Profession(null, "GINEKOLOG"));
-            userService.saveProfession(new Profession(null, "DENTYSTA"));
-            userService.saveProfession(new Profession(null, "OKULISTA"));
-            userService.saveProfession(new Profession(null, "LEKARZ_RODZINNY"));
-
-            userService.saveUser(new Users("Robert", "Makłowicz", "nakarmieciekoprem@gmail.com", "duszonewino123"));
-            //userService.saveUser(new Users("Janusz", "Grzesznik", "allinone@gmail.com", "zatkanyzlew", UserType.DOCTOR));
-            userService.saveUser(new Users("Hania", "Mania", "haniamania@gmail.com", "abcdef"));
-
-
-        };
-    }
-
-
 }

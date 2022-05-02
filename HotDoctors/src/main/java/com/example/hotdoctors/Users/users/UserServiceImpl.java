@@ -17,21 +17,22 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 @Transactional
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService//, UserDetailsService
+         {
     private final UserRepository userRepository;
     private final ProfessionRepository profRepository;
 
 
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users user = userRepository.findUserByName(username);
-        if (user == null) throw new UsernameNotFoundException("User not found in the database");
-
-        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        user.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
-    }
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        Users user = userRepository.findUserByName(username);
+//        if (user == null) throw new UsernameNotFoundException("User not found in the database");
+//
+//        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//        user.getRoleList().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
+//        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+//    }
 
 
 
