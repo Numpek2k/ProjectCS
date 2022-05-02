@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -16,33 +17,26 @@ import java.util.Date;
 public class Visit {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "genVisit"
-    )
-    @SequenceGenerator(
-            name = "genVisit",
-            allocationSize = 1
-    )
-    Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     @NotBlank
-    Integer h_start;
+    private Integer h_start;
 
     @NotBlank
-    Date date;
+    private Date date;
 
-    @NotBlank
-    Enum<VisitStatus> status;
-
+    @ManyToOne
+    @JoinColumn(name = "idStatus")
+    private Status status;
 
 
     @ManyToOne
     @JoinColumn(name = "idDoctor")
-    Users idDoctor;
+    private Users idDoctor;
 
     @ManyToOne
     @JoinColumn(name = "idPatient")
-    Users idPatient;
+    private Users idPatient;
 
 }
