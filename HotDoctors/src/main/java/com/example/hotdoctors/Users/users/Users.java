@@ -39,6 +39,14 @@ public class Users {
     private String password;
 
 
+    public Users(String name, String surname, String email, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+    }
+
+
 
 
     @JsonIgnore
@@ -46,14 +54,14 @@ public class Users {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private Role role;
+    private Role role = new Role();
 
     @JsonIgnore
     @OneToOne( mappedBy = "users",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private DoctorInfo doctorInfo;
+    private DoctorInfo doctorInfo = new DoctorInfo();
 
     @JsonIgnore
     @OneToMany( mappedBy = "idWho",

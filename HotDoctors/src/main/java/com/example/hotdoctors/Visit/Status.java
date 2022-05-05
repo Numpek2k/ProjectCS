@@ -9,10 +9,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-@Data
+@AllArgsConstructor @NoArgsConstructor @Entity @Data
 public class Status {
 
     @Id
@@ -25,5 +22,4 @@ public class Status {
 
     @OneToMany(mappedBy = "status")
     private List<Visit> visitList = new ArrayList<>();
-
 }

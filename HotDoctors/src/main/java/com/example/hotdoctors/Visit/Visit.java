@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -38,5 +37,4 @@ public class Visit {
     @ManyToOne
     @JoinColumn(name = "idPatient")
     private Users idPatient;
-
 }

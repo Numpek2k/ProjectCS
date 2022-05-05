@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@Entity @AllArgsConstructor @NoArgsConstructor @Data
 public class Comment {
 
     @Id
@@ -31,5 +28,4 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "idPatient")
     private Users idPatient;
-
 }

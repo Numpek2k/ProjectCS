@@ -10,10 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.DayOfWeek;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@Entity @AllArgsConstructor @NoArgsConstructor @Data
 public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,5 +26,4 @@ public class Schedule {
     @ManyToOne
     @JoinColumn(name = "idUser")
     private Users users;
-
 }
