@@ -49,11 +49,8 @@ public class Users {
 
 
 
-    @JsonIgnore
-    @OneToOne( mappedBy = "users",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
+    @ManyToOne
+    @JoinColumn(name = "user_role")
     private Role role = new Role();
 
     @JsonIgnore

@@ -17,9 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Service
-@AllArgsConstructor
-@Transactional
+@Service @AllArgsConstructor @Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
     private final ProfessionRepository profRepository;
