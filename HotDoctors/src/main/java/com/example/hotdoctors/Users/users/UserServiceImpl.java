@@ -10,6 +10,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,10 +24,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
     private final ProfessionRepository profRepository;
     private final RoleRepository roleRepository;
+    private final BCryptPasswordEncoder BCryptPasswordEncoder;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users user = userRepository.findUserByName(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Users user = userRepository.findUserByEmail(email);
         if (user == null) throw new UsernameNotFoundException("User not found in the database");
 
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
@@ -34,11 +37,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
 
-
-
-
     @Override
     public Users saveUser(Users user) {
+        user.setPassword(BCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
     @Override

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -17,7 +18,8 @@ import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity @AllArgsConstructor @NoArgsConstructor @Data
+@Entity @Data
+@RequiredArgsConstructor
 public class Users {
 
     @Id
@@ -39,18 +41,7 @@ public class Users {
     private String password;
 
 
-    public Users(String name, String surname, String email, String password) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-    }
-
-
-
-
     @ManyToOne
-    @JoinColumn(name = "user_role")
     private Role role = new Role();
 
     @JsonIgnore

@@ -15,4 +15,14 @@ Group members:\
 | *Service     | ```interface```, contains a list of methods<br/>implemented by a specific entity |
 | *ServiceImpl | ```class```, implements methods from service                                     |
 | *Repository  | ```interface```, extends JpaRepository                                           |
- .* ----> entity + Name
+
+
+# Passwords
+
+
+| Email                     | Password |
+|---------------------------|----------|
+| januszgrzesznik@gmail.com | patient  |
+| realdoc@gmail.com         | doctor   |
+| guestguy@gmail.com        | guest    |
+
