@@ -24,5 +24,5 @@ Group members:\
 |---------------------------|----------|
 | januszgrzesznik@gmail.com | patient  |
 | realdoc@gmail.com         | doctor   |
-| guestguy@gmail.com        | guest    |
+
 
