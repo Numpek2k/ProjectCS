@@ -21,10 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URI;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -111,46 +108,46 @@ public class UserController {
     }
 
 
-//    @GetMapping("/token/refresh")
-//    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        String authorizationHeader = request.getHeader(AUTHORIZATION);
-//
-//        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-//            try {
-//                String refresh_token = authorizationHeader.substring("Bearer ".length());
-//                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-//                JWTVerifier verifier = JWT.require(algorithm).build();
-//                DecodedJWT decodedJWT = verifier.verify(refresh_token);
-//
-//                String email = decodedJWT.getSubject();
-//                Users user = userServiceImpl.findUserByEmail(email);
-//
-//                String access_token = JWT.create()
-//                        .withSubject(user.getEmail())
-//                        .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 10))
-//                        .withIssuer(request.getRequestURL().toString())
-//                        .withClaim("roles", List.of(user.getRole().getName()))
-//                        .sign(algorithm);
-//
-//                Map<String, String> tokens = new HashMap<>();
-//                tokens.put("access_token", access_token);
-//                tokens.put("refresh_token", refresh_token);
-//
-//                response.setContentType(APPLICATION_JSON_VALUE);
-//                new ObjectMapper().writeValue(response.getOutputStream(), tokens);
-//
-//            } catch (Exception exception) {
-//                log.error("Error logging in: {}", exception.getMessage());
-//                response.setHeader("error ", exception.getMessage());
-//                response.setStatus(FORBIDDEN.value());
-//
-//                Map<String, String> error = new HashMap<>();
-//                error.put("error_message", exception.getMessage());
-//
-//                response.setContentType(APPLICATION_JSON_VALUE);
-//                new ObjectMapper().writeValue(response.getOutputStream(), error);
-//            }
-//
-//        } else throw new RuntimeException("Refresh token is missing");
-//    }
+    @GetMapping("/token/refresh")
+    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String authorizationHeader = request.getHeader(AUTHORIZATION);
+
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            try {
+                String refresh_token = authorizationHeader.substring("Bearer ".length());
+                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+                JWTVerifier verifier = JWT.require(algorithm).build();
+                DecodedJWT decodedJWT = verifier.verify(refresh_token);
+
+                String email = decodedJWT.getSubject();
+                Users user = userServiceImpl.findUserByEmail(email);
+
+                String access_token = JWT.create()
+                        .withSubject(user.getEmail())
+                        .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 10))
+                        .withIssuer(request.getRequestURL().toString())
+                        .withClaim("roles", Collections.singletonList(user.getRole().getName()))
+                        .sign(algorithm);
+
+                Map<String, String> tokens = new HashMap<>();
+                tokens.put("access_token", access_token);
+                tokens.put("refresh_token", refresh_token);
+
+                response.setContentType(APPLICATION_JSON_VALUE);
+                new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+
+            } catch (Exception exception) {
+                log.error("Error logging in: {}", exception.getMessage());
+                response.setHeader("error ", exception.getMessage());
+                response.setStatus(FORBIDDEN.value());
+
+                Map<String, String> error = new HashMap<>();
+                error.put("error_message", exception.getMessage());
+
+                response.setContentType(APPLICATION_JSON_VALUE);
+                new ObjectMapper().writeValue(response.getOutputStream(), error);
+            }
+
+        } else throw new RuntimeException("Refresh token is missing");
+    }
 }

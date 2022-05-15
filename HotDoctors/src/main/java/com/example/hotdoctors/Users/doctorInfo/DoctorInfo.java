@@ -22,6 +22,7 @@ public class DoctorInfo {
 
     private String description;
 
+    @NotBlank
     private String address;
 
     @OneToOne

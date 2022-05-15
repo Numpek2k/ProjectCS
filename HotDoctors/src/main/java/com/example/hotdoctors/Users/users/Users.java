@@ -47,7 +47,6 @@ public class Users {
         this.password = password;
     }
 
-
     @ManyToOne
     private Role role;
 
@@ -56,7 +55,7 @@ public class Users {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private DoctorInfo doctorInfo = new DoctorInfo();
+    private DoctorInfo doctorInfo;
 
     @JsonIgnore
     @OneToMany( mappedBy = "idWho",
