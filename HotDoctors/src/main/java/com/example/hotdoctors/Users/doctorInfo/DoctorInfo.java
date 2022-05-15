@@ -1,7 +1,6 @@
 package com.example.hotdoctors.Users.doctorInfo;
 
 import com.example.hotdoctors.Users.profession.Profession;
-import com.example.hotdoctors.Users.role.Role;
 import com.example.hotdoctors.Users.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +22,6 @@ public class DoctorInfo {
 
     private String description;
 
-    @NotBlank
     private String address;
 
     @OneToOne

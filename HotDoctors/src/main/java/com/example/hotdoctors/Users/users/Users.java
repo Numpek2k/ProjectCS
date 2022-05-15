@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Data
-@RequiredArgsConstructor
+@NoArgsConstructor @AllArgsConstructor
 public class Users {
 
     @Id
@@ -40,9 +40,16 @@ public class Users {
     @NotBlank
     private String password;
 
+    public Users(String name, String surname, String email, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+    }
+
 
     @ManyToOne
-    private Role role = new Role();
+    private Role role;
 
     @JsonIgnore
     @OneToOne( mappedBy = "users",

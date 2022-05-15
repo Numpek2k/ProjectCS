@@ -1,6 +1,5 @@
 package com.example.hotdoctors.Users.users;
 
-import com.example.hotdoctors.Users.doctorInfo.DoctorInfoRepository;
 import com.example.hotdoctors.Users.profession.Profession;
 import com.example.hotdoctors.Users.profession.ProfessionRepository;
 import com.example.hotdoctors.Users.role.Role;
@@ -11,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -71,6 +69,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public Users findUserById(Integer userId) {
         return userRepository.findById(userId).orElseThrow();
     }
+    @Override
+    public Users findUserByEmail(String email) { return userRepository.findUserByEmail(email); }
+
+
     @Override
     public Profession findProfById(Integer profId) { return profRepository.findById(profId).orElseThrow(); }
     @Override

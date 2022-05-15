@@ -1,7 +1,6 @@
 package com.example.hotdoctors;
 
-import com.example.hotdoctors.Users.profession.Profession;
-import com.example.hotdoctors.Users.users.UserService;
+import com.example.hotdoctors.Users.users.UserServiceImpl;
 import com.example.hotdoctors.Users.users.Users;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

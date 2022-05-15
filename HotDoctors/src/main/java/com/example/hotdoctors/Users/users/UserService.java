@@ -16,6 +16,8 @@ public interface UserService {
     void deleteRole(Integer roleId);
 
     Users findUserById(Integer userId);
+    Users findUserByEmail(String email);
+
     Profession findProfById(Integer profId);
     Role findRoleById(Integer roleId);
 
