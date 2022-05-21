@@ -8,6 +8,7 @@ import {NavBarComponent} from './components/nav-bar/nav-bar.component';
 import {DoctorDetailComponent} from './components/doctor-detail/doctor-detail.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HomeComponent} from './components/home/home.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -18,11 +19,12 @@ import {HomeComponent} from './components/home/home.component';
     DoctorDetailComponent,
     HomeComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
