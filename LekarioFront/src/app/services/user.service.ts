@@ -44,9 +44,9 @@ export class UserService {
       .subscribe(tokens => this.tokens = tokens);
   }
 
-  register(user: User): void {
+  register(user: User): Observable<User> {
     let url = this.baseUrl.url + '/save/user';
-    this.http.post<User>(url, user).subscribe(user => this.user = user);
+    return  this.http.post<User>(url, user);
   }
 
   getUserById(id: number): Observable<User> {
@@ -59,5 +59,8 @@ export class UserService {
     return this.http.get<User>(url);
   }
 
+  setTokens(tokens: Tokens): void{
+    this.tokens = tokens;
+  }
 
 }

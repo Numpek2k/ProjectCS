@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {UserService} from "../../services/user.service";
+import {Router} from "@angular/router";
 import {Tokens} from "../../utility/tokens";
 
 @Component({
@@ -11,22 +12,35 @@ import {Tokens} from "../../utility/tokens";
 export class LoginComponent implements OnInit {
 
   loginForm = this.formBuilder.group({
-      email: '',
-      password: ''
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     }
   )
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService) { }
+              private userService: UserService,
+              private router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
-  onLogin(): void{
-    this.userService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(tokens => {
-      this.userService.tokens = tokens;
-      if (tokens === undefined) console.log('adsfhgi')
-      this.userService.getUserByEmail(this.loginForm.value.email);
-    });
+  get email(){
+    return this.loginForm.controls['email']
+  }
+
+  // get password(){
+  //   return this.loginForm
+  // }
+
+  onLogin(): void {
+    let credentials = this.loginForm.value;
+    this.userService.login(credentials.email, credentials.password).subscribe(tokens => this.successfulLogin(tokens));
+  }
+
+  successfulLogin(tokens: Tokens) {
+    this.userService.setTokens(tokens);
+    this.userService.getUserByEmail(this.loginForm.value.email).subscribe(user => this.userService.user = user);
+    this.router.navigate(['/']);
   }
 }

@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.login('sjsgdf@o2.pl', 'asuydfu');
+    // this.userService.login('sjsgdf@o2.pl', 'asuydfu');
     // this.userService.getAllUsers().subscribe(res => console.log(res));
     // this.userService.refresh();
     // let user: User = {
