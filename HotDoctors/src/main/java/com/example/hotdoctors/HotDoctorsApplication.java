@@ -1,12 +1,12 @@
 package com.example.hotdoctors;
 
-import com.example.hotdoctors.Users.users.UserServiceImpl;
-import com.example.hotdoctors.Users.users.Users;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class HotDoctorsApplication {
@@ -19,4 +19,30 @@ public class HotDoctorsApplication {
         return new BCryptPasswordEncoder();
     }
 
+//    @Configuration
+//    public static class WebMvcConfig implements WebMvcConfigurer{
+//        @Override
+//        public void addCorsMappings(CorsRegistry registry) {
+//            registry.addMapping("/*")
+//                    .allowedOrigins("*")
+//                    .allowedMethods("*")
+//                    .allowedHeaders("*")
+//                    .maxAge(-1)
+//                    .allowCredentials(true);
+//        }
+//    }
+
+    @Bean
+    public WebMvcConfigurer CORSConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedHeaders("*")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD")
+                        .maxAge(-1);
+            }
+        };
+    }
 }
