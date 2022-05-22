@@ -20,7 +20,6 @@ import java.util.List;
 @Service @AllArgsConstructor @Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
-    private final ProfessionRepository profRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder BCryptPasswordEncoder;
 
@@ -36,13 +35,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 
     @Override
-    public Users saveUser(Users user) {
+    public Users saveUser(Users user, Boolean isDoctor) {
         user.setPassword(BCryptPasswordEncoder.encode(user.getPassword()));
+
+        if (isDoctor) user.setRole(roleRepository.findByName("DOCTOR"));
+        else user.setRole(roleRepository.findByName("PATIENT"));
+
         return userRepository.save(user);
-    }
-    @Override
-    public Profession saveProfession(Profession profession) {
-        return profRepository.save(profession);
     }
     @Override
     public Role saveRole(Role role) {
@@ -54,10 +53,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void deleteUser(Integer userId) {
         userRepository.deleteById(userId);
-    }
-    @Override
-    public void deleteProfession(Integer profId) {
-        profRepository.deleteById(profId);
     }
     @Override
     public void deleteRole(Integer roleId) {
@@ -74,8 +69,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 
     @Override
-    public Profession findProfById(Integer profId) { return profRepository.findById(profId).orElseThrow(); }
-    @Override
     public Role findRoleById(Integer roleId) {
         return roleRepository.findById(roleId).orElseThrow();
     }
@@ -86,22 +79,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.findAll();
     }
     @Override
-    public List<Profession> findAllProf() {
-        return profRepository.findAll();
-    }
-    @Override
-    public List<Role> findAllRole() {
+    public List<Role> findAllRoles() {
         return roleRepository.findAll();
     }
 
 
-    @Override
-    public void addProfToUser(Integer userId, Integer profId) {
-        Users user = findUserById(userId);
-        Profession prof = findProfById(profId);
-        user.getDoctorInfo().getProfessionList().add(prof);
-        userRepository.save(user);
-    }
     @Override
     public void addRoleToUser(Integer userId, Integer roleId) {
         Users user = findUserById(userId);

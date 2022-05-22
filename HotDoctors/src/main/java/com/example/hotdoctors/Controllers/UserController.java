@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.hotdoctors.Users.doctorInfo.DoctorInfoServiceImpl;
 import com.example.hotdoctors.Users.profession.Profession;
 import com.example.hotdoctors.Users.role.Role;
 import com.example.hotdoctors.Users.users.UserServiceImpl;
@@ -35,15 +36,10 @@ public class UserController {
 
 
     @PostMapping("/save/user")
-    public ResponseEntity<Users> saveUser(@RequestBody @Valid Users user) {
+    public ResponseEntity<Users> saveUser(@RequestBody Users user, @RequestParam Boolean isDoctor) {
 
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/save/user").toUriString());
-        return ResponseEntity.created(uri).body(userServiceImpl.saveUser(user));
-    }
-    @PostMapping("/save/prof")
-    public ResponseEntity<Profession> saveProfession(@RequestBody Profession profession) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/save/prof").toUriString());
-        return ResponseEntity.created(uri).body(userServiceImpl.saveProfession(profession));
+        return ResponseEntity.created(uri).body(userServiceImpl.saveUser(user, isDoctor));
     }
     @PostMapping("/save/role")
     public ResponseEntity<Role> saveRole(@RequestBody Role role) {
@@ -54,8 +50,6 @@ public class UserController {
 
     @DeleteMapping("/delete/user")
     public void deleteUser(Integer id) { userServiceImpl.deleteUser(id); }
-    @DeleteMapping ("/delete/prof")
-    public void deleteProfession(Integer id) { userServiceImpl.deleteProfession(id); }
     @DeleteMapping("/delete/role")
     public void deleteRole(Integer id) { userServiceImpl.deleteRole(id); }
 
@@ -68,13 +62,6 @@ public class UserController {
     public ResponseEntity<Users> findUser(String email) {
         return ResponseEntity.ok().body(userServiceImpl.findUserByEmail(email));
     }
-
-
-
-    @GetMapping("/find/prof")
-    public ResponseEntity<Profession> findProf(Integer id) {
-        return ResponseEntity.ok().body(userServiceImpl.findProfById(id));
-    }
     @GetMapping("/find/role")
     public ResponseEntity<Role> findRole(Integer id) {
         return ResponseEntity.ok().body(userServiceImpl.findRoleById(id));
@@ -85,22 +72,13 @@ public class UserController {
     public ResponseEntity<List<Users>> findUserAll() {
         return ResponseEntity.ok().body(userServiceImpl.findAllUsers());
     }
-    @GetMapping("/find/prof/all")
-    public ResponseEntity<List<Profession>> findProfAll() {
-        return ResponseEntity.ok().body(userServiceImpl.findAllProf());
-    }
     @GetMapping("find/role/all")
     public ResponseEntity<List<Role>> findRoleAll() {
-        return ResponseEntity.ok().body(userServiceImpl.findAllRole());
+        return ResponseEntity.ok().body(userServiceImpl.findAllRoles());
 
     }
 
 
-    @PatchMapping("/add/prof")
-    public ResponseEntity<?> addProfToUser(@RequestParam Integer userId, @RequestParam Integer profId) {
-        userServiceImpl.addProfToUser(userId, profId);
-        return ResponseEntity.ok().build();
-    }
     @PatchMapping("/add/role")
     public ResponseEntity<?> addRoleToUser(@RequestParam Integer userId, @RequestParam Integer roleId) {
         userServiceImpl.addRoleToUser(userId, roleId);

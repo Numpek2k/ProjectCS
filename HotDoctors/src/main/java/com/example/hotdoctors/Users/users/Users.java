@@ -7,6 +7,7 @@ import com.example.hotdoctors.Users.doctorInfo.DoctorInfo;
 import com.example.hotdoctors.Users.role.Role;
 import com.example.hotdoctors.Visit.Visit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,6 +39,7 @@ public class Users {
     private String email;
 
     @NotBlank
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     public Users(String name, String surname, String email, String password) {
@@ -93,6 +95,7 @@ public class Users {
             fetch = FetchType.LAZY)
     private List<Comment> commentDoctor = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany( mappedBy = "idPatient",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)

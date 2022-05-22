@@ -7,24 +7,19 @@ import java.util.List;
 
 public interface UserService {
 
-    Users saveUser(Users user);
-    Profession saveProfession(Profession profession);
+    Users saveUser(Users user, Boolean isDoctor);
     Role saveRole(Role role);
 
     void deleteUser(Integer userId);
-    void deleteProfession(Integer profId);
     void deleteRole(Integer roleId);
 
     Users findUserById(Integer userId);
     Users findUserByEmail(String email);
 
-    Profession findProfById(Integer profId);
     Role findRoleById(Integer roleId);
 
     List<Users> findAllUsers();
-    List<Profession> findAllProf();
-    List<Role> findAllRole();
+    List<Role> findAllRoles();
 
-    void addProfToUser(Integer userId, Integer profId);
     void addRoleToUser(Integer userId, Integer roleId);
 }
