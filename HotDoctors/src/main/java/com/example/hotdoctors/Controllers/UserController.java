@@ -121,7 +121,9 @@ public class UserController {
                 String email = decodedJWT.getSubject();
                 Users user = userServiceImpl.findUserByEmail(email);
 
-                String access_token = JWT.create()
+                String access_token =
+                        "Bearer " +
+                        JWT.create()
                         .withSubject(user.getEmail())
                         .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 10))
                         .withIssuer(request.getRequestURL().toString())

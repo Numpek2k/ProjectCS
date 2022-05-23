@@ -1,13 +1,10 @@
 package com.example.hotdoctors.Users.users;
 
-import com.example.hotdoctors.Users.doctorInfo.DoctorInfo;
-import com.example.hotdoctors.Users.doctorInfo.DoctorInfoRepository;
 import com.example.hotdoctors.Users.profession.Profession;
 import com.example.hotdoctors.Users.profession.ProfessionRepository;
 import com.example.hotdoctors.Users.role.Role;
 import com.example.hotdoctors.Users.role.RoleRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -45,8 +42,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         if (isDoctor) user.setRole(roleRepository.findByName("DOCTOR"));
         else user.setRole(roleRepository.findByName("PATIENT"));
-
-
 
         return userRepository.save(user);
     }
