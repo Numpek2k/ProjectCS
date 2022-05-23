@@ -26,18 +26,14 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     @NotBlank
     private String name;
-
     @NotBlank
     private String surname;
-
     @NotBlank
     @Email
     @Column(unique = true)
     private String email;
-
     @NotBlank
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
@@ -49,14 +45,20 @@ public class Users {
         this.password = password;
     }
 
+    public Users(String name, String surname, String email, String password, DoctorInfo doctorInfo) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.doctorInfo = doctorInfo;
+    }
+
+
     @ManyToOne
     private Role role;
 
-    @JsonIgnore
-    @OneToOne( mappedBy = "users",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     private DoctorInfo doctorInfo;
 
     @JsonIgnore

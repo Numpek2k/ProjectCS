@@ -4,7 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.hotdoctors.Users.doctorInfo.DoctorInfoServiceImpl;
+import com.example.hotdoctors.Users.doctorInfo.DoctorInfo;
 import com.example.hotdoctors.Users.profession.Profession;
 import com.example.hotdoctors.Users.role.Role;
 import com.example.hotdoctors.Users.users.UserServiceImpl;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URI;
 import java.util.*;
@@ -33,9 +32,13 @@ public class UserController {
     private final UserServiceImpl userServiceImpl;
 
 
+    @PostMapping("/save/prof")
+    public ResponseEntity<Profession> saveProfession(@RequestBody Profession profession) {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/save/prof").toUriString());
+        return ResponseEntity.created(uri).body(userServiceImpl.saveProfession(profession));
+    }
     @PostMapping("/save/user")
     public ResponseEntity<Users> saveUser(@RequestBody Users user, @RequestParam Boolean isDoctor) {
-
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/save/user").toUriString());
         return ResponseEntity.created(uri).body(userServiceImpl.saveUser(user, isDoctor));
     }
@@ -46,12 +49,21 @@ public class UserController {
     }
 
 
+
     @DeleteMapping("/delete/user")
     public void deleteUser(Integer id) { userServiceImpl.deleteUser(id); }
     @DeleteMapping("/delete/role")
     public void deleteRole(Integer id) { userServiceImpl.deleteRole(id); }
+    @DeleteMapping("/delete/prof")
+    public void deleteProfession(Integer id) { userServiceImpl.deleteProfession(id); }
 
 
+
+
+    @GetMapping("/find/prof")
+    public ResponseEntity<Profession> findProf(Integer id) {
+        return ResponseEntity.ok().body(userServiceImpl.findProfById(id));
+    }
     @GetMapping("/find/user/id")
     public ResponseEntity<Users> findUser(Integer id) {
         return ResponseEntity.ok().body(userServiceImpl.findUserById(id));
@@ -65,9 +77,9 @@ public class UserController {
         return ResponseEntity.ok().body(userServiceImpl.findRoleById(id));
     }
 
+
     @GetMapping("/find/user/all")
     public ResponseEntity<List<Users>> findUserAll() {
-        log.info("asjdnflksajdnfo");
         return ResponseEntity.ok().body(userServiceImpl.findAllUsers());
     }
     @GetMapping("find/role/all")
@@ -75,6 +87,11 @@ public class UserController {
         return ResponseEntity.ok().body(userServiceImpl.findAllRoles());
 
     }
+    @GetMapping("/find/prof/all")
+    public ResponseEntity<List<Profession>> findProfAll() {
+        return ResponseEntity.ok().body(userServiceImpl.findAllProf());
+    }
+
 
 
     @PatchMapping("/add/role")
@@ -82,6 +99,12 @@ public class UserController {
         userServiceImpl.addRoleToUser(userId, roleId);
         return ResponseEntity.ok().build();
     }
+    @PatchMapping("/add/prof")
+    public ResponseEntity<?> addProfToUser(@RequestParam Integer userId, @RequestParam Integer profId) {
+        userServiceImpl.addProfToUser(userId, profId);
+        return ResponseEntity.ok().build();
+    }
+
 
 
     @GetMapping("/token/refresh")

@@ -2,12 +2,11 @@ package com.example.hotdoctors.Users.doctorInfo;
 
 import com.example.hotdoctors.Users.profession.Profession;
 import com.example.hotdoctors.Users.users.Users;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,17 +16,18 @@ public class DoctorInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private String imagePath;
-
     private String description;
-
-    @NotBlank
     private String address;
 
-    @OneToOne
-    @JoinColumn(name = "idUser")
-    private Users users;
+    public DoctorInfo(String address) {
+        this.address = address;
+    }
+
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "doctorInfo")
+    private Users user;
 
     @ManyToMany
     @JoinTable(

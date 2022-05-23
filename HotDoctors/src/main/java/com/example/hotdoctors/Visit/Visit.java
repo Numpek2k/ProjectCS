@@ -9,10 +9,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@Entity @Data
+@AllArgsConstructor @NoArgsConstructor
 public class Visit {
 
     @Id

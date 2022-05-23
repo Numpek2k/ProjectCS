@@ -1,10 +1,13 @@
 package com.example.hotdoctors.Users.users;
 
+import com.example.hotdoctors.Users.doctorInfo.DoctorInfo;
+import com.example.hotdoctors.Users.doctorInfo.DoctorInfoRepository;
 import com.example.hotdoctors.Users.profession.Profession;
 import com.example.hotdoctors.Users.profession.ProfessionRepository;
 import com.example.hotdoctors.Users.role.Role;
 import com.example.hotdoctors.Users.role.RoleRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,7 +24,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final ProfessionRepository profRepository;
     private final BCryptPasswordEncoder BCryptPasswordEncoder;
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -41,12 +46,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (isDoctor) user.setRole(roleRepository.findByName("DOCTOR"));
         else user.setRole(roleRepository.findByName("PATIENT"));
 
+
+
         return userRepository.save(user);
     }
     @Override
     public Role saveRole(Role role) {
         return roleRepository.save(role);
     }
+    @Override
+    public Profession saveProfession(Profession profession) { return profRepository.save(profession); }
 
 
 
@@ -58,6 +67,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void deleteRole(Integer roleId) {
         roleRepository.deleteById(roleId);
     }
+    @Override
+    public void deleteProfession(Integer profId) { profRepository.deleteById(profId); }
+
 
 
     @Override
@@ -66,12 +78,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
     @Override
     public Users findUserByEmail(String email) { return userRepository.findUserByEmail(email); }
-
-
     @Override
     public Role findRoleById(Integer roleId) {
         return roleRepository.findById(roleId).orElseThrow();
     }
+    @Override
+    public Profession findProfById(Integer profId) { return profRepository.findById(profId).orElseThrow(); }
+
 
 
     @Override
@@ -82,6 +95,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public List<Role> findAllRoles() {
         return roleRepository.findAll();
     }
+    @Override
+    public List<Profession> findAllProf() { return profRepository.findAll(); }
+
 
 
     @Override
@@ -91,4 +107,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setRole(role);
         userRepository.save(user);
     }
+    @Override
+    public void addProfToUser(Integer userId, Integer profId) {
+        Users user = findUserById(userId);
+        Profession prof = findProfById(profId);
+        user.getDoctorInfo().getProfessionList().add(prof);
+        userRepository.save(user);
+    }
 }
+
+//@Query(value = "SELECT * FROM doctor_info d WHERE d.address = ?1", nativeQuery = true)
+//@Query(value = "DELETE FROM doctor_info WHERE id = ?1", nativeQuery = true)
