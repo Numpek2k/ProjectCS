@@ -1,0 +1,19 @@
+.parent_bg{
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.search_form{
+  width: 50vw;
+  height: 25vh;
+  background: rgba(300, 300, 300, .4);
+  border: 2px solid rgba(100, 100, 100, .4);
+}
+
+.bg_img{
+  overflow:hidden;
+  object-fit: cover;
+  width: 100vw;
+  height: 65vh;
+  filter: blur(2px);
+}

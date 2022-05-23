@@ -7,7 +7,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  isLoggedIn = false;
+  isLoggedIn = true;
 
   constructor(public router: Router) {
   }
