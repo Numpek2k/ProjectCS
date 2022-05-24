@@ -8,18 +8,14 @@ import {UserService} from "../../services/user.service";
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  // isLoggedIn = false;
 
   constructor(public router: Router,
-              private userService: UserService) {
+              public userService: UserService) {
   }
 
   ngOnInit(): void {
   }
 
-  isLoggedIn(): boolean{
-    return this.userService.user !== undefined;
-  }
 
   isShown(): boolean {
     return !(this.router.url === '/login' || this.router.url === '/register');

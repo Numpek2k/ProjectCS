@@ -68,4 +68,8 @@ export class UserService {
     this.tokens = undefined;
   }
 
+  isLoggedIn(): boolean{
+    return this.user !== undefined;
+  }
+
 }
