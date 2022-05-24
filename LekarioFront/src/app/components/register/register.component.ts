@@ -41,8 +41,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister(): void {
-    let temp = this.registerForm.value;
-    if (temp.password !== temp.password2) return;
     this.registerForm.removeControl('password2')
     this.userService.register(this.registerForm.value as User).subscribe(user => this.successfulRegister(user));
   }
