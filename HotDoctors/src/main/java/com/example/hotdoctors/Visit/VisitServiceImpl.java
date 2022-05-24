@@ -1,8 +1,10 @@
 package com.example.hotdoctors.Visit;
 
+import com.example.hotdoctors.Users.users.Users;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -11,27 +13,29 @@ public class VisitServiceImpl implements VisitService {
 
     private final VisitRepository visitRepository;
 
+
     @Override
     public void registerVisit(Visit visit) {
 
-        visitRepository.save(visit);
     }
 
     @Override
     public void cancelVisit(Integer visitId) {
 
-        visitRepository.deleteById(visitId);
     }
 
     @Override
-    public List<Visit> getAllDoctorVisits(Integer doctorId) {
+    public List<Visit> getAllVisits(Users user, Date start, Date end) {
+        return null;
+    }
 
-        return visitRepository.findAllById(doctorId);
+    @Override
+    public List<Visit> getAllVisitsDetail(Users user, Date start, Date end) {
+        return null;
     }
 
     @Override
     public Visit getVisit(Integer visitId) {
-
-        return visitRepository.findById(visitId).orElseThrow();
+        return null;
     }
 }

@@ -5,7 +5,11 @@ import com.example.hotdoctors.Users.profession.ProfessionRepository;
 import com.example.hotdoctors.Users.role.Role;
 import com.example.hotdoctors.Users.role.RoleRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,11 +17,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Service @AllArgsConstructor @Transactional
+@Service @AllArgsConstructor @Transactional @Slf4j
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -109,7 +114,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.getDoctorInfo().getProfessionList().add(prof);
         userRepository.save(user);
     }
-}
 
-//@Query(value = "SELECT * FROM doctor_info d WHERE d.address = ?1", nativeQuery = true)
-//@Query(value = "DELETE FROM doctor_info WHERE id = ?1", nativeQuery = true)
+    @Override
+    public String getCurrentUser(Principal user) {
+        return user.getName();
+    }
+}

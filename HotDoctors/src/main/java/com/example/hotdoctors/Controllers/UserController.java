@@ -4,21 +4,26 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.hotdoctors.Users.doctorInfo.DoctorInfo;
+
 import com.example.hotdoctors.Users.profession.Profession;
 import com.example.hotdoctors.Users.role.Role;
 import com.example.hotdoctors.Users.users.UserServiceImpl;
 import com.example.hotdoctors.Users.users.Users;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
+import java.security.Principal;
 import java.util.*;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -85,7 +90,6 @@ public class UserController {
     @GetMapping("find/role/all")
     public ResponseEntity<List<Role>> findRoleAll() {
         return ResponseEntity.ok().body(userServiceImpl.findAllRoles());
-
     }
     @GetMapping("/find/prof/all")
     public ResponseEntity<List<Profession>> findProfAll() {
@@ -150,5 +154,11 @@ public class UserController {
             }
 
         } else throw new RuntimeException("Refresh token is missing");
+    }
+
+    @GetMapping("/find/user/current")
+    public ResponseEntity<?> findCurrentUser(Principal user) {
+        log.info("USER: {}", user);
+        return ResponseEntity.ok().body(userServiceImpl.getCurrentUser(user));
     }
 }

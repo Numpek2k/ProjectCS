@@ -3,6 +3,7 @@ package com.example.hotdoctors.Users.users;
 import com.example.hotdoctors.Users.profession.Profession;
 import com.example.hotdoctors.Users.role.Role;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface UserService {
@@ -26,4 +27,6 @@ public interface UserService {
 
     void addRoleToUser(Integer userId, Integer roleId);
     void addProfToUser(Integer userId, Integer profId);
+
+    String getCurrentUser(Principal user);
 }
