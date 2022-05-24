@@ -16,12 +16,11 @@ public class Visit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     @NotBlank
     private Integer h_start;
-
     @NotBlank
     private Date date;
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "idStatus")
