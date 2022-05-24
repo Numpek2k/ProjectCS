@@ -46,7 +46,7 @@ export class UserService {
 
   register(user: User): Observable<User> {
     let url = this.baseUrl.url + '/save/user';
-    return  this.http.post<User>(url, user);
+    return this.http.post<User>(url, user);
   }
 
   getUserById(id: number): Observable<User> {
@@ -59,8 +59,13 @@ export class UserService {
     return this.http.get<User>(url);
   }
 
-  setTokens(tokens: Tokens): void{
+  setTokens(tokens: Tokens): void {
     this.tokens = tokens;
+  }
+
+  logout(): void {
+    this.user = undefined;
+    this.tokens = undefined;
   }
 
 }
