@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import {baseUrl} from "../utility/globals";
 
 @Injectable({
   providedIn: 'root'
 })
-export class BaseUrlService {
+export class SearchService {
 
-  url = "http://localhost:8080";
   constructor() { }
+
+
 }

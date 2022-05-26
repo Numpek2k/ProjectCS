@@ -22,7 +22,9 @@
 <!--TODO: for 5 newest opinion show this -->
   <div class="position-relative w-75 mt-3 start-50 translate-middle-x">
     <h3>Najnowsze opinie:</h3>
-    <app-card-holder-home [doctor]="doc"></app-card-holder-home>
+    <ng-template ngFor let-doc [ngForOf]="doctors">
+      <app-card-holder-home [doctor]="doc"></app-card-holder-home>
+    </ng-template>
   </div>
 <!--  <div *ngIf="userService.isLoggedIn">{{userService.user?.name}}</div>-->
 </div>

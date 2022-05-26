@@ -9,14 +9,26 @@ import {User} from "../../utility/user";
 })
 export class HomeComponent implements OnInit {
 
-  doc: User = {
-    name: 'Unknown',
-    surname: 'Doctor',
-    email: 'asas@gmail.com',
+  doctors: User[]
+
+  constructor(public userService: UserService) {
+    let doc: User = {
+      name: 'Unknown',
+      surname: 'Doctor',
+      email: 'asas@gmail.com',
+      doctorInfo: {
+        id: 1,
+        professionList: [''],
+        description: 'hakuna matata',
+        imagePath: '',
+        address: ''
+      }
+    }
+    this.doctors = [doc, doc, doc, doc, doc]
   }
-  constructor(public userService: UserService) { }
 
   ngOnInit(): void {
+    this.userService.getUserById(1).subscribe(console.log)
   }
 
 

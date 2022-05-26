@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {User} from "../utility/user";
-import {BaseUrlService} from "./base-url.service";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Tokens} from "../utility/tokens";
 import {Observable} from "rxjs";
+import {baseUrl} from "../utility/globals";
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +13,17 @@ export class UserService {
   user?: User;
   tokens?: Tokens;
 
-  constructor(private baseUrl: BaseUrlService,
-              private http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   getAllUsers(): Observable<User[]> {
-    let url = this.baseUrl.url + '/find/user/all/';
+    let url = baseUrl + '/find/user/all/';
 
     return this.http.get<User[]>(url);
   }
 
   login(email: string, password: string): Observable<any> {
-    let url = this.baseUrl.url + '/login';
+    let url = baseUrl + '/login';
 
     const body = new HttpParams()
       .set('email', email)
@@ -37,7 +36,7 @@ export class UserService {
   }
 
   refresh(): void {
-    let url = this.baseUrl.url + '/token/refresh';
+    let url = baseUrl + '/token/refresh';
 
     if (this.tokens === undefined) return;
     this.http.get<Tokens>(url, {
@@ -48,24 +47,28 @@ export class UserService {
   }
 
   register(user: User, isDoctor: boolean): Observable<User> {
-    let url = this.baseUrl.url + '/save/user';
+    let url = baseUrl + '/save/user';
     return this.http.post<User>(url, user, {
       params: new HttpParams().set('isDoctor', isDoctor)
     });
   }
 
   getUserById(id: number): Observable<User> {
-    let url = this.baseUrl.url + '/find/user/id?id=' + id;
-    return this.http.get<User>(url);
+    let url = baseUrl + '/find/user/id';
+    return this.http.get<User>(url, {
+      params: new HttpParams().set('id', id)
+    });
   }
 
   getUserByEmail(email: string): Observable<User> {
-    let url = this.baseUrl.url + '/find/user/email?email=' + email;
-    return this.http.get<User>(url);
+    let url = baseUrl + '/find/user/email';
+    return this.http.get<User>(url, {
+      params: new HttpParams().set('email', email)
+    });
   }
 
   getCurrentUser(): Observable<User> {
-    let url = this.baseUrl.url + '/find/user/current';
+    let url = baseUrl + '/find/user/current';
     if (this.tokens === undefined) throw Error('login first');
 
     return this.http.get<User>(url, {
