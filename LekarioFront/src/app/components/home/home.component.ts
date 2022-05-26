@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getUserById(1).subscribe(console.log)
   }
 
 
