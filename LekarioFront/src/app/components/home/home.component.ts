@@ -9,6 +9,11 @@ import {User} from "../../utility/user";
 })
 export class HomeComponent implements OnInit {
 
+  doc: User = {
+    name: 'Unknown',
+    surname: 'Doctor',
+    email: 'asas@gmail.com',
+  }
   constructor(public userService: UserService) { }
 
   ngOnInit(): void {

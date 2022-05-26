@@ -40,13 +40,18 @@ export class UserService {
     let url = this.baseUrl.url + '/token/refresh';
 
     if (this.tokens === undefined) return;
-    this.http.get<Tokens>(url, {headers: new HttpHeaders().set('Authorization', this.tokens.refresh_token)})
+    this.http.get<Tokens>(url, {
+      headers: new HttpHeaders()
+        .set('Authorization', this.tokens.refresh_token)
+    })
       .subscribe(tokens => this.tokens = tokens);
   }
 
-  register(user: User): Observable<User> {
+  register(user: User, isDoctor: boolean): Observable<User> {
     let url = this.baseUrl.url + '/save/user';
-    return this.http.post<User>(url, user);
+    return this.http.post<User>(url, user, {
+      params: new HttpParams().set('isDoctor', isDoctor)
+    });
   }
 
   getUserById(id: number): Observable<User> {
@@ -59,6 +64,16 @@ export class UserService {
     return this.http.get<User>(url);
   }
 
+  getCurrentUser(): Observable<User> {
+    let url = this.baseUrl.url + '/find/user/current';
+    if (this.tokens === undefined) throw Error('login first');
+
+    return this.http.get<User>(url, {
+      headers: new HttpHeaders()
+        .set('Authorization', this.tokens.access_token)
+    });
+  }
+
   setTokens(tokens: Tokens): void {
     this.tokens = tokens;
   }
@@ -68,8 +83,8 @@ export class UserService {
     this.tokens = undefined;
   }
 
-  isLoggedIn(): boolean{
-    return this.user !== undefined;
+  isLoggedIn(): boolean {
+    return this.tokens !== undefined;
   }
 
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {UserService} from "../../services/user.service";
 import {User} from "../../utility/user";
 import {Router} from "@angular/router";
@@ -17,8 +17,9 @@ export class RegisterComponent implements OnInit {
     surname: ['', Validators.required],
     password: ['', {validators: [Validators.required, Validators.minLength(8)], updateOn: 'blur'}],
     password2: ['', {validators: Validators.required, updateOn: 'blur'}],
-    email: ['', {validators: [Validators.email, Validators.required], updateOn: 'blur'}]
-  }, {validators: samePasswordValidator, updateOn: "blur"})
+    email: ['', {validators: [Validators.email, Validators.required], updateOn: 'blur'}],
+    role: ['patient', Validators.required]
+  }, {validators: samePasswordValidator})
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
@@ -40,13 +41,27 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls['password']
   }
 
+  get surname(){
+    return this.registerForm.controls['surname']
+  }
+  get role() {
+    return this.registerForm.controls['role']
+  }
+
   onRegister(): void {
-    this.registerForm.removeControl('password2')
-    this.userService.register(this.registerForm.value as User).subscribe(user => this.successfulRegister(user));
+    let user: User = {
+      name: this.name.value,
+      surname: this.surname.value,
+      password: this.password.value,
+      email: this.email.value,
+    }
+    this.userService.register(user, this.role.value === 'doctor')
+      .subscribe(user => this.successfulRegister(user));
   }
 
   successfulRegister(user: User) {
     this.userService.user = user;
-    this.router.navigate(['/home']);
+    this.userService.login(user.email, this.password.value).subscribe(tokens => this.userService.setTokens(tokens))
+    this.router.navigate(['/']);
   }
 }

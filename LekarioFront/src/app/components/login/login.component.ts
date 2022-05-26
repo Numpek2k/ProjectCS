@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
 
   successfulLogin(tokens: Tokens) {
     this.userService.setTokens(tokens);
-    this.userService.getUserByEmail(this.loginForm.value.email).subscribe(user => this.userService.user = user);
+    this.userService.getCurrentUser().subscribe(user => this.userService.user = user);
     this.router.navigate(['/']);
   }
 }
