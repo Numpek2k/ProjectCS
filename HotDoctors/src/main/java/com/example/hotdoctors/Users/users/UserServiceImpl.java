@@ -116,7 +116,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public String getCurrentUser(Principal user) {
-        return user.getName();
+    public Users getCurrentUser(Principal user) {
+        String email = user.getName();
+        return findUserByEmail(email);
     }
 }

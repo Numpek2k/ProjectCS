@@ -28,5 +28,5 @@ public interface UserService {
     void addRoleToUser(Integer userId, Integer roleId);
     void addProfToUser(Integer userId, Integer profId);
 
-    String getCurrentUser(Principal user);
+    Users getCurrentUser(Principal user);
 }

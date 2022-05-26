@@ -157,7 +157,7 @@ public class UserController {
     }
 
     @GetMapping("/find/user/current")
-    public ResponseEntity<?> findCurrentUser(Principal user) {
+    public ResponseEntity<Users> findCurrentUser(Principal user) {
         log.info("USER: {}", user);
         return ResponseEntity.ok().body(userServiceImpl.getCurrentUser(user));
     }
