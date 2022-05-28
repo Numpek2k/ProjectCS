@@ -1,6 +1,7 @@
 package com.example.hotdoctors.Users.profession;
 
 import com.example.hotdoctors.Users.doctorInfo.DoctorInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ public class Profession {
 
     public Profession(String name) { this.name = name; }
 
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "professionList")
     private List<DoctorInfo> usersList = new ArrayList<>();
 }

@@ -25,6 +25,7 @@ public class DoctorInfo {
     }
 
 
+
     @JsonIgnore
     @OneToOne(mappedBy = "doctorInfo")
     private Users user;
