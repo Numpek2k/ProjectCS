@@ -18,18 +18,17 @@ export class UserService {
 
   getAllUsers(): Observable<User[]> {
     let url = baseUrl + '/find/user/all/';
-
     return this.http.get<User[]>(url);
   }
 
-  login(email: string, password: string): Observable<any> {
+  login(email: string, password: string): Observable<Tokens> {
     let url = baseUrl + '/login';
 
     const body = new HttpParams()
       .set('email', email)
       .set('password', password);
 
-    return this.http.post<any>(url, body.toString(), {
+    return this.http.post<Tokens>(url, body.toString(), {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
     });
@@ -42,8 +41,7 @@ export class UserService {
     this.http.get<Tokens>(url, {
       headers: new HttpHeaders()
         .set('Authorization', this.tokens.refresh_token)
-    })
-      .subscribe(tokens => this.tokens = tokens);
+    }).subscribe(tokens => this.tokens = tokens);
   }
 
   register(user: User, isDoctor: boolean): Observable<User> {
@@ -69,11 +67,8 @@ export class UserService {
 
   getCurrentUser(): Observable<User> {
     let url = baseUrl + '/find/user/current';
-    if (this.tokens === undefined) throw Error('login first');
-
     return this.http.get<User>(url, {
-      headers: new HttpHeaders()
-        .set('Authorization', this.tokens.access_token)
+      headers: this.getAuthorizationHeader()
     });
   }
 
@@ -90,4 +85,8 @@ export class UserService {
     return this.tokens !== undefined;
   }
 
+  getAuthorizationHeader(): HttpHeaders{
+    if (this.tokens === undefined) throw Error('login first');
+    return new HttpHeaders().set('Authorization', this.tokens.access_token)
+  }
 }

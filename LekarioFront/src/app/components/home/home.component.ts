@@ -17,11 +17,7 @@ export class HomeComponent implements OnInit {
       surname: 'Doctor',
       email: 'asas@gmail.com',
       doctorInfo: {
-        id: 1,
-        professionList: [''],
-        description: 'hakuna matata',
-        imagePath: '',
-        address: ''
+        description: 'hakuna matata'
       }
     }
     this.doctors = [doc, doc, doc, doc, doc]
