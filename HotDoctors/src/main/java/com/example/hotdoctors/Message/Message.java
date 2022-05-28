@@ -22,6 +22,8 @@ public class Message {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date = new Date();
 
+    boolean read = false;
+
     @ManyToOne
     @JoinColumn(name = "id_who")
     private Users idWho;
