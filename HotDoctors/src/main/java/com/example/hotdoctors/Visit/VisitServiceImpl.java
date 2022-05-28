@@ -25,17 +25,17 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public List<Visit> getAllVisits(Users user, Date start, Date end) {
-        return null;
-    }
-
-    @Override
-    public List<Visit> getAllVisitsDetail(Users user, Date start, Date end) {
+    public List<Visit> getAllVisits(Integer id, Date start, Date end) {
         return null;
     }
 
     @Override
     public Visit getVisit(Integer visitId) {
         return null;
+    }
+
+    @Override
+    public void updateVisit() {
+
     }
 }
