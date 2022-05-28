@@ -3,7 +3,7 @@ import {User} from "../utility/user";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Tokens} from "../utility/tokens";
 import {Observable} from "rxjs";
-import {baseUrl} from "../utility/globals";
+import {BASE_URL} from "../utility/globals";
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +17,12 @@ export class UserService {
   }
 
   getAllUsers(): Observable<User[]> {
-    let url = baseUrl + '/find/user/all/';
+    let url = BASE_URL + '/find/user/all/';
     return this.http.get<User[]>(url);
   }
 
   login(email: string, password: string): Observable<Tokens> {
-    let url = baseUrl + '/login';
+    let url = BASE_URL + '/login';
 
     const body = new HttpParams()
       .set('email', email)
@@ -35,7 +35,7 @@ export class UserService {
   }
 
   refresh(): void {
-    let url = baseUrl + '/token/refresh';
+    let url = BASE_URL + '/token/refresh';
 
     if (this.tokens === undefined) return;
     this.http.get<Tokens>(url, {
@@ -45,28 +45,28 @@ export class UserService {
   }
 
   register(user: User, isDoctor: boolean): Observable<User> {
-    let url = baseUrl + '/save/user';
+    let url = BASE_URL + '/save/user';
     return this.http.post<User>(url, user, {
       params: new HttpParams().set('isDoctor', isDoctor)
     });
   }
 
   getUserById(id: number): Observable<User> {
-    let url = baseUrl + '/find/user/id';
+    let url = BASE_URL + '/find/user/id';
     return this.http.get<User>(url, {
       params: new HttpParams().set('id', id)
     });
   }
 
   getUserByEmail(email: string): Observable<User> {
-    let url = baseUrl + '/find/user/email';
+    let url = BASE_URL + '/find/user/email';
     return this.http.get<User>(url, {
       params: new HttpParams().set('email', email)
     });
   }
 
   getCurrentUser(): Observable<User> {
-    let url = baseUrl + '/find/user/current';
+    let url = BASE_URL + '/find/user/current';
     return this.http.get<User>(url, {
       headers: this.getAuthorizationHeader()
     });
