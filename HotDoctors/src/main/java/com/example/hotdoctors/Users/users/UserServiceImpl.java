@@ -1,5 +1,7 @@
 package com.example.hotdoctors.Users.users;
 
+import com.example.hotdoctors.Users.doctorInfo.DoctorInfo;
+import com.example.hotdoctors.Users.doctorInfo.DoctorInfoRepository;
 import com.example.hotdoctors.Users.profession.Profession;
 import com.example.hotdoctors.Users.profession.ProfessionRepository;
 import com.example.hotdoctors.Users.role.Role;
@@ -28,7 +30,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final RoleRepository roleRepository;
     private final ProfessionRepository profRepository;
     private final BCryptPasswordEncoder BCryptPasswordEncoder;
-
+    private final DoctorInfoRepository doctorInfoRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -45,7 +47,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public Users saveUser(Users user, Boolean isDoctor) {
         user.setPassword(BCryptPasswordEncoder.encode(user.getPassword()));
 
-        if (isDoctor) user.setRole(roleRepository.findByName("DOCTOR"));
+        if (isDoctor) {
+            user.setRole(roleRepository.findByName("DOCTOR"));
+            DoctorInfo doctorInfo = new DoctorInfo();
+            doctorInfoRepository.save(doctorInfo);
+            user.setDoctorInfo(doctorInfo);
+        }
         else user.setRole(roleRepository.findByName("PATIENT"));
 
         return userRepository.save(user);
