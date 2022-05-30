@@ -3,6 +3,8 @@
     <h2>Ginekolog Warszawa</h2>
 
 <!--TODO: for all results show this-->
-    <app-card-holder-search></app-card-holder-search>
+    <ng-template ngFor let-doc [ngForOf]="doctors">
+      <app-card-holder-search [doctor]="doc"></app-card-holder-search>
+    </ng-template>
   </div>
 </div>

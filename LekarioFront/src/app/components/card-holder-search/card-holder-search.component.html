@@ -2,13 +2,15 @@
   <div class="card-title">
     <img class="rounded-3 col-2 float-start mt-2 mx-2" alt="..." src="assets/doc-avatar.webp">
     <div class="float-start ms-3 my-2 col-3">
-      <h5 class="card-title">Imie Nazwisko</h5>
-      <p class="card-text"> Ginekolog </p>
-      <p class="card-text"> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i> <i class="bi bi-star"></i>  100 opinii </p>
+      <h5 class="card-title">{{doctor.name}} {{doctor.surname}}</h5>
+      <ng-template ngFor let-prof [ngForOf]="doctor.doctorInfo?.professionList">
+        <p class="card-text"> {{prof.name}} </p>
+      </ng-template>
+      <p class="card-text"> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i> <i class="bi bi-star"></i>  {{comments?.length}} opinions</p>
     </div>
     <div class="float-start ms-3 my-3 col-5">
-      <p class="card-text"><i class="bi bi-geo-alt-fill"></i> Warszawa, Marszałkowska 21/37 </p>
-      <p class="card-text"><i class="bi bi-card-text"></i> Jestem lekarzem z długoletnim starzem, ginekologia to moja specjalność.  </p>
+      <p class="card-text"><i class="bi bi-geo-alt-fill"></i> {{doctor.doctorInfo?.address}} </p>
+      <p class="card-text"><i class="bi bi-card-text"></i> {{doctor.doctorInfo?.description}}  </p>
     </div>
   </div>
 </div>

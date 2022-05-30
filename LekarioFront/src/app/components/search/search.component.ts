@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../../services/user.service";
+import {User} from "../../utility/user";
 
 @Component({
   selector: 'app-search',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  doctors?: User[];
+
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.userService.getUsersByProf('Dentist').subscribe(doctors => this.doctors = doctors); //TODO result of search
   }
 
 }
