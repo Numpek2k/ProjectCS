@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MessageService {
 
-    Message saveMessage(Message message);
+    Message saveMessage(Principal user, Integer targetID, Message message);
 
 
     Page<Message> getAllMessages(Principal user, Integer page, Integer targetId);
