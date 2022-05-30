@@ -45,18 +45,26 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public Message saveMessage(Message message) {
+    public Message saveMessage(Principal user, Integer targetId, Message message) {
+        Users u = userService.getCurrentUser(user);
+        Users tU = userService.findUserById(targetId);
+
+        message.setIdWho(u);
+        message.setIdWhom(tU);
 
         return messageRepo.save(message);
     }
 
     @Override
     public List<Message> getAllUnread(Principal user) {
-        return null;
+        Users u = userService.getCurrentUser(user);
+        return messageRepo.allUnread(u);
     }
 
     @Override
     public List<Message> getAllUnreadFromChat(Principal user, Integer targetId) {
-        return null;
+        Users u = userService.getCurrentUser(user);
+        Users tU = userService.findUserById(targetId);
+        return messageRepo.allUnreadFromChat(u, tU);
     }
 }

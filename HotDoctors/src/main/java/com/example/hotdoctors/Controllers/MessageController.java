@@ -18,27 +18,27 @@ public class MessageController {
     private final MessageServiceImpl messageServiceImpl;
 
     @PostMapping("/save")
-    public ResponseEntity<Message> saveMessage(@RequestBody Message message) {
+    public ResponseEntity<Message> saveMessage(@RequestParam Principal user,
+                                               @RequestParam Integer targetId,
+                                               @RequestBody Message message) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/message/save").toUriString());
-        return ResponseEntity.created(uri).body(messageServiceImpl.saveMessage(message));
+        return ResponseEntity.created(uri).body(messageServiceImpl.saveMessage(user, targetId, message));
     }
+
 
 
     @GetMapping("/get")
     public ResponseEntity<Page<Message>> getAllMessages(Principal user,
                                                         @RequestParam(defaultValue = "0") Integer page,
                                                         @RequestParam Integer targetId) {
-
         return ResponseEntity.ok().body(messageServiceImpl.getAllMessages(user, page,  targetId));
     }
-    @GetMapping("/get/unread")
+    @GetMapping("/get/unread/all")
     public ResponseEntity<List<Message>> getAllUnread(Principal user) {
-
         return ResponseEntity.ok().body(messageServiceImpl.getAllUnread(user));
     }
-    @GetMapping("/get/unread/all")
+    @GetMapping("/get/unread")
     public ResponseEntity<List<Message>> getAllUnreadFromChat(Principal user, Integer targetId) {
-
         return ResponseEntity.ok().body(messageServiceImpl.getAllUnreadFromChat(user, targetId));
     }
 }
