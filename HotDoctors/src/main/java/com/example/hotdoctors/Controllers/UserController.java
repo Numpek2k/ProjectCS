@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
+import com.example.hotdoctors.Users.doctorInfo.DoctorInfo;
 import com.example.hotdoctors.Users.profession.Profession;
 import com.example.hotdoctors.Users.role.Role;
 import com.example.hotdoctors.Users.users.UserServiceImpl;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.security.Principal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
@@ -156,5 +158,12 @@ public class UserController {
     public ResponseEntity<Users> findCurrentUser(Principal user) {
         log.info("USER: {}", user);
         return ResponseEntity.ok().body(userServiceImpl.getCurrentUser(user));
+    }
+
+    @GetMapping("/find/user")
+    public ResponseEntity<List<Users>> findUsersByProf(@RequestParam String prof){
+        List<DoctorInfo> doctorInfos = userServiceImpl.findProfessionByName(prof).getUsersList();
+        List<Users> usersList = doctorInfos.stream().map(DoctorInfo::getUser).collect(Collectors.toList());
+        return ResponseEntity.ok(usersList);
     }
 }

@@ -127,4 +127,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         String email = user.getName();
         return findUserByEmail(email);
     }
+
+    public Profession findProfessionByName(String name){
+        return profRepository.findProfByName(name);
+    }
 }
