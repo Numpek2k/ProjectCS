@@ -4,6 +4,7 @@ import com.example.hotdoctors.Users.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,6 +18,7 @@ public class Comment {
 
     private String content;
 
+    @Range(max = 5)
     private Integer rating;
 
     private Date date = new Date();

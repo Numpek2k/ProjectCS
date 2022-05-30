@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user.service";
 import {User} from "../../utility/user";
+import {CommentService} from "../../services/comment.service";
+import {Comment} from "../../utility/comment";
 
 @Component({
   selector: 'app-home',
@@ -10,8 +12,10 @@ import {User} from "../../utility/user";
 export class HomeComponent implements OnInit {
 
   doctors: User[]
+  comments?: Comment[]
 
-  constructor(public userService: UserService) {
+  constructor(public userService: UserService,
+              private commentService: CommentService) {
     let doc: User = {
       name: 'Unknown',
       surname: 'Doctor',
@@ -24,6 +28,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.commentService.getNewestComments().subscribe(comments => this.comments = comments)
   }
 
 

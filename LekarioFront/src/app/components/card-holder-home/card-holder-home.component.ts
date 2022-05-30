@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from "../../utility/user";
+import {Comment} from "../../utility/comment";
 
 @Component({
   selector: 'app-card-holder-home',
@@ -8,7 +8,7 @@ import {User} from "../../utility/user";
 })
 export class CardHolderHomeComponent implements OnInit {
 
-  @Input() doctor!: User
+  @Input() comment!: Comment
   constructor() { }
 
   ngOnInit(): void {
