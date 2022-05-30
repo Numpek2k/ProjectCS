@@ -89,4 +89,11 @@ export class UserService {
     if (this.tokens === undefined) throw Error('login first');
     return new HttpHeaders().set('Authorization', this.tokens.access_token)
   }
+
+  getUsersByProf(prof: string): Observable<User[]>{
+    let url = BASE_URL + '/find/user/prof';
+    let httpParams = new HttpParams()
+      .set('prof', prof);
+    return this.http.get<User[]>(url, {params: httpParams});
+  }
 }

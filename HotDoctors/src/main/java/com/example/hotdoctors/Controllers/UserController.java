@@ -160,10 +160,11 @@ public class UserController {
         return ResponseEntity.ok().body(userServiceImpl.getCurrentUser(user));
     }
 
-    @GetMapping("/find/user")
+    @GetMapping("/find/user/prof")
     public ResponseEntity<List<Users>> findUsersByProf(@RequestParam String prof){
         List<DoctorInfo> doctorInfos = userServiceImpl.findProfessionByName(prof).getUsersList();
         List<Users> usersList = doctorInfos.stream().map(DoctorInfo::getUser).collect(Collectors.toList());
         return ResponseEntity.ok(usersList);
     }
+
 }
