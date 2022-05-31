@@ -7,7 +7,7 @@ import {HomeComponent} from "./components/home/home.component";
 import {SearchComponent} from "./components/search/search.component";
 
 const routes: Routes = [
-  {path: 'doctor', component: DoctorDetailComponent},
+  {path: 'doctor/:id', component: DoctorDetailComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'home', component: HomeComponent},

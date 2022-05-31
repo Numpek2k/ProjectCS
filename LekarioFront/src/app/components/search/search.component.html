@@ -4,7 +4,7 @@
 
 <!--TODO: for all results show this-->
     <ng-template ngFor let-doc [ngForOf]="doctors">
-      <app-card-holder-search [doctor]="doc"></app-card-holder-search>
+      <app-card-holder-search [doctor]="doc" [routerLink]="['/doctor', doc.id]"></app-card-holder-search>
     </ng-template>
   </div>
 </div>

@@ -22,7 +22,7 @@
   <div class="position-relative w-75 mt-3 start-50 translate-middle-x">
     <h3>Najnowsze opinie:</h3>
     <ng-template ngFor let-comment [ngForOf]="comments">
-      <app-card-holder-home [comment]="comment"></app-card-holder-home>
+      <app-card-holder-home [comment]="comment" [routerLink]="['/doctor', comment.idDoctor.id]"></app-card-holder-home>
     </ng-template>
   </div>
 <!--  <div *ngIf="userService.isLoggedIn">{{userService.user?.name}}</div>-->
