@@ -1,13 +1,17 @@
 package com.example.hotdoctors.Schedule;
 
+import com.example.hotdoctors.Users.users.Users;
+
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
 public interface ScheduleService {
 
     List<Schedule> getSchedule(Integer id, Date from, Date to);
+    List<Schedule> getSchedule(Integer id);
 
-    void setSchedule(Schedule schedule);
+    Schedule setSchedule(Principal user, Schedule schedule);
 
-    void updateSchedule(Integer id);
+    Schedule updateSchedule(Integer id, Schedule schedule);
 }

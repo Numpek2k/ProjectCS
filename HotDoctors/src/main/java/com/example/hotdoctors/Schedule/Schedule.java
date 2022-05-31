@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.DayOfWeek;
+import java.util.Date;
 
 @Entity @AllArgsConstructor @NoArgsConstructor @Data
 public class Schedule {
@@ -19,11 +20,14 @@ public class Schedule {
     @NotBlank
     private DayOfWeek day;
 
+    @Temporal(TemporalType.DATE)
+    private Date date;
+
     private Integer h_start;
 
     private Integer h_end;
 
     @ManyToOne
     @JoinColumn(name = "idUser")
-    private Users users;
+    private Users user;
 }
