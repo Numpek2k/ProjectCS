@@ -52,7 +52,10 @@ public class ScheduleServiceImpl implements ScheduleService{
     @Override
     public Schedule updateSchedule(Integer id, Schedule schedule) {
         Schedule original = scheduleRepo.findById(id).orElseThrow();
-        original = schedule;
+        if (schedule.getDay() != null) original.setDay(schedule.getDay());
+        if (schedule.getDate() != null) original.setDate(schedule.getDate());
+        if (schedule.getH_start() != null) original.setH_start(schedule.getH_start());
+        if (schedule.getH_end() != null) original.setH_end(schedule.getH_end());
         return scheduleRepo.save(original);
     }
 }
