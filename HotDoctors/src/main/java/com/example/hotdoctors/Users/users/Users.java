@@ -73,7 +73,7 @@ public class Users {
     private List<Message> followers = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany( mappedBy = "users",
+    @OneToMany( mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private List<Schedule> schedule = new ArrayList<>();

@@ -1,5 +1,6 @@
 package com.example.hotdoctors.Users.users;
 
+import com.example.hotdoctors.Users.doctorInfo.DoctorInfo;
 import com.example.hotdoctors.Users.profession.Profession;
 import com.example.hotdoctors.Users.role.Role;
 
@@ -11,6 +12,12 @@ public interface UserService {
     Users saveUser(Users user, Boolean isDoctor);
     Role saveRole(Role role);
     Profession saveProfession(Profession profession);
+
+    void updateUserName(Principal user, String name);
+    void updateUserSurname(Principal user, String surname);
+    void updateUserEmail(Principal user, String email);
+    void updateUserPassword(Principal user, String password);
+    void updateUserDoctorInfo(Principal user, DoctorInfo doctorInfo);
 
     void deleteUser(Integer userId);
     void deleteRole(Integer roleId);

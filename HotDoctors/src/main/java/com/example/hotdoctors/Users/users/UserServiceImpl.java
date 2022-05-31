@@ -64,6 +64,37 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public Profession saveProfession(Profession profession) { return profRepository.save(profession); }
 
+    @Override
+    public void updateUserName(Principal user, String name) {
+        Users u = getCurrentUser(user);
+        u.setName(name);
+        userRepository.save(u);
+    }
+    @Override
+    public void updateUserSurname(Principal user, String surname) {
+        Users u = getCurrentUser(user);
+        u.setSurname(surname);
+        userRepository.save(u);
+    }
+    @Override
+    public void updateUserEmail(Principal user, String email) {
+        Users u = getCurrentUser(user);
+        u.setEmail(email);
+        userRepository.save(u);
+    }
+    @Override
+    public void updateUserPassword(Principal user, String password) {
+        Users u = getCurrentUser(user);
+        u.setPassword(password);
+        userRepository.save(u);
+    }
+    @Override
+    public void updateUserDoctorInfo(Principal user, DoctorInfo doctorInfo) {
+        Users u = getCurrentUser(user);
+        u.setDoctorInfo(doctorInfo);
+        userRepository.save(u);
+    }
+
 
 
     @Override

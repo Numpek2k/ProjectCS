@@ -51,6 +51,32 @@ public class UserController {
         return ResponseEntity.created(uri).body(userServiceImpl.saveRole(role));
     }
 
+    @PostMapping("/user/update/name")
+    public ResponseEntity<?> updateUserName(Principal user, @RequestBody String name) {
+        userServiceImpl.updateUserName(user, name);
+        return ResponseEntity.ok().build();
+    }
+    @PostMapping("/user/update/surname")
+    public ResponseEntity<?> updateUserSurname(Principal user, @RequestBody String surname) {
+        userServiceImpl.updateUserSurname(user, surname);
+        return ResponseEntity.ok().build();
+    }
+    @PostMapping("/user/update/email")
+    public ResponseEntity<?> updateUserEmail(Principal user, @RequestBody String email) {
+        userServiceImpl.updateUserEmail(user, email);
+        return ResponseEntity.ok().build();
+    }
+    @PostMapping("/user/update/password")
+    public ResponseEntity<?> updateUserPassword(Principal user, @RequestBody String password) {
+        userServiceImpl.updateUserPassword(user, password);
+        return ResponseEntity.ok().build();
+    }
+    @PostMapping("/user/update/doctorInfo")
+    public ResponseEntity<?> updateUserDoctorInfo(Principal user,
+                                                  @RequestBody DoctorInfo doctorInfo) {
+        userServiceImpl.updateUserDoctorInfo(user, doctorInfo);
+        return ResponseEntity.ok().build();
+    }
 
 
     @DeleteMapping("/delete/user")
