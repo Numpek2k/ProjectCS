@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface VisitService {
 
-    void registerVisit(Visit visit);
+    Visit registerVisit(Visit visit);
     void cancelVisit(Integer visitId);
     List<Visit> getAllVisits(Integer id, Date start, Date end);
     Visit getVisit(Integer visitId);
-    void updateVisit();
+    void updateVisit(Integer visitId, Visit visit);
 }
