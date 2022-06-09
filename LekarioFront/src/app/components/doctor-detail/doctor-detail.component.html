@@ -9,9 +9,14 @@
           <div class="col-md ">
             <div class="card-body">
               <div class="fs-3">{{doctor?.name}} {{doctor?.surname}}</div>
-              <ng-template ngFor let-prof [ngForOf]="doctor?.doctorInfo?.professionList">
-                <p class="card-text text-muted align-self-start">{{prof.name}}</p>
-              </ng-template>
+              <div class="card-text text-muted align-self-start">
+                <ng-template ngFor let-prof [ngForOf]="doctor?.doctorInfo?.professionList">
+                  {{prof.name}},
+                </ng-template>
+              </div>
+              <div>
+                <p class="card-text"> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i> <i class="bi bi-star"></i> opinions </p>
+              </div>
               <p class="card-text">{{doctor?.doctorInfo?.description}}</p>
             </div>
           </div>
