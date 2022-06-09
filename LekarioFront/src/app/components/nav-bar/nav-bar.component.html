@@ -9,11 +9,11 @@
       <div class="navbar-nav">
         <div *ngIf="userService.isLoggedIn(); else loggedOut" class="navbar-nav">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button"
                data-bs-toggle="dropdown" aria-expanded="false">
               My account
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
               <li><a class="dropdown-item">Settings</a></li>
               <li><a class="dropdown-item">Appointments</a></li>
               <li><a class="dropdown-item">Chat</a></li>
