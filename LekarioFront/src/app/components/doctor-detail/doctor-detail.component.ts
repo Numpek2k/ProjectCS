@@ -31,10 +31,7 @@ export class DoctorDetailComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     if(id === null) throw Error('id should be a number');
     this.userService.getUserById(parseInt(id)).subscribe(doc => this.doctor = doc);
-    this.commentService.getCommentsAboutDoctor(parseInt(id)).subscribe(comments => {
-      this.comments = comments
-      console.log(comments);
-    })
+    this.commentService.getCommentsAboutDoctor(parseInt(id)).subscribe(comments => this.comments = comments);
   }
 
 
