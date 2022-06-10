@@ -19,6 +19,7 @@ public class Visit {
     @NotBlank
     private Integer h_start;
     @NotBlank
+    @Temporal(TemporalType.DATE)
     private Date date;
     private String description;
 
