@@ -10,6 +10,6 @@ import java.util.List;
 public interface CommentRepository
          extends JpaRepository <Comment, Integer> {
 
-    List<Comment> findAllByIdDoctor(Users users);
+    List<Comment> findAllByIdDoctorOrderByDateDesc(Users users);
     List<Comment> findFirst5ByOrderByDateDesc();
 }

@@ -12,6 +12,7 @@ import {CardHolderHomeComponent} from "./components/card-holder-home/card-holder
 import { SearchComponent } from './components/search/search.component';
 import { CardHolderSearchComponent } from './components/card-holder-search/card-holder-search.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { CommentHolderComponent } from './components/comment-holder/comment-holder.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     CardHolderHomeComponent,
     SearchComponent,
     CardHolderSearchComponent,
+    CommentHolderComponent,
   ],
     imports: [
         BrowserModule,
