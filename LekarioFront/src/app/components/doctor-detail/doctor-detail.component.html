@@ -9,9 +9,14 @@
           <div class="col-md ">
             <div class="card-body">
               <div class="fs-3">{{doctor?.name}} {{doctor?.surname}}</div>
-              <ng-template ngFor let-prof [ngForOf]="doctor?.doctorInfo?.professionList">
-                <p class="card-text text-muted align-self-start">{{prof.name}}</p>
-              </ng-template>
+              <div class="card-text text-muted align-self-start">
+                <ng-template ngFor let-prof [ngForOf]="doctor?.doctorInfo?.professionList">
+                  {{prof.name}},
+                </ng-template>
+              </div>
+              <div>
+                <p class="card-text"> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i> <i class="bi bi-star"></i> {{comments?.length}} opinions </p>
+              </div>
               <p class="card-text">{{doctor?.doctorInfo?.description}}</p>
             </div>
           </div>
@@ -22,23 +27,31 @@
             </label>
             <input type="radio" name="state" id="opinions" class="invisible" value="opinions" formControlName="state">
             <label for="opinions" class="tab form-check-label">
-              Opinions
+              Opinions ({{comments?.length}})
             </label>
           </div>
         </div>
       </div>
       <div class="card">
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div class="card-body">
             <div *ngIf="this.state.value === 'info' else isComments">
-              <h5 class="card-title">Info</h5>
-              <p class="card-text">{{doctor?.doctorInfo?.description}}</p>
+              <h3 class="card-title">Info</h3>
+              <div *ngIf="doctor?.doctorInfo?.description != null" class="mt-2">
+                <h5 class="card-title">Description:</h5>
+                <p class="card-text">{{doctor?.doctorInfo?.description}}</p>
+              </div>
+              <div *ngIf="doctor?.doctorInfo?.address != null" class="mt-2">
+                <h5 class="card-title">Address:</h5>
+                <p class="card-text">{{doctor?.doctorInfo?.address}}</p>
+              </div>
+
             </div>
           </div>
           <ng-template #isComments>
-            <h5 class="card-title">Opinions</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-              content. This content is a little bit longer. </p>
+            <ng-template ngFor let-comment [ngForOf]="comments">
+              <app-comment-holder [comment] = "comment" [routerLink]="['/doctor', comment.idDoctor.id]"></app-comment-holder>
+            </ng-template>
           </ng-template>
         </div>
       </div>

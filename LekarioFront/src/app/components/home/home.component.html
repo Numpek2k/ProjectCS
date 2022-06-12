@@ -3,16 +3,16 @@
     <img class="bg_img img-fluid position-relative" src="assets/home_bg_img.png" alt="..."/>
     <div class="position-absolute top-50 start-50 translate-middle">
       <div class="search_form rounded">
-        <h4 class="mt-2 ms-2"> Znajdz lekarza i umów wizytę: </h4>
+        <h4 class="mt-2 ms-2"> Find a doctor and make appointments: </h4>
         <form class="input-group mt-3 row h-75">
           <div class="col ms-2">
-            <input type="text" class="form-control col-sm-3" placeholder="Specjalista lub nazwisko" aria-label="Specjalista lub nazwisko">
+            <input type="text" class="form-control col-sm-3" placeholder="Specialist or surname" aria-label="Specialist or surname">
           </div>
           <div class="col">
-            <input type="text" class="form-control col-sm-3" placeholder="miasto" aria-label="miasto">
+            <input type="text" class="form-control col-sm-3" placeholder="city" aria-label="city">
           </div>
           <div class="">
-            <button type="submit" class="w-25 start-50 translate-middle btn btn-default">Szukaj</button>
+            <button type="submit" class="w-25 start-50 translate-middle btn btn-default">Search</button>
           </div>
         </form>
       </div>
@@ -20,7 +20,7 @@
   </div>
 
   <div class="position-relative w-75 mt-3 start-50 translate-middle-x">
-    <h3>Najnowsze opinie:</h3>
+    <h3>Newest opinions:</h3>
     <ng-template ngFor let-comment [ngForOf]="comments">
       <app-card-holder-home [comment]="comment" [routerLink]="['/doctor', comment.idDoctor.id]"></app-card-holder-home>
     </ng-template>

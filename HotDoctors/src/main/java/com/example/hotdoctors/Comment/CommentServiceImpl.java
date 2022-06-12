@@ -29,7 +29,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     public List<Comment> getCommentsByAddressee(Integer id){
-        return commentRepository.findAllByIdDoctor(userService.findUserById(id));
+        return commentRepository.findAllByIdDoctorOrderByDateDesc(userService.findUserById(id));
     }
 
     public List<Comment> getNewestComments(){
