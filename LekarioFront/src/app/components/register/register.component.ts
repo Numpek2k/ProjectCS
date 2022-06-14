@@ -19,7 +19,9 @@ export class RegisterComponent implements OnInit {
     password2: ['', {validators: Validators.required, updateOn: 'blur'}],
     email: ['', {validators: [Validators.email, Validators.required], updateOn: 'blur'}],
     role: ['patient', Validators.required]
-  }, {validators: samePasswordValidator})
+  }, {validators: samePasswordValidator});
+
+  userExists = false;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
@@ -56,7 +58,10 @@ export class RegisterComponent implements OnInit {
       email: this.email.value,
     }
     this.userService.register(user, this.role.value === 'doctor')
-      .subscribe(user => this.successfulRegister(user));
+      .subscribe({
+        next: user => this.successfulRegister(user),
+        error: err => this.userExists = true
+      });
   }
 
   successfulRegister(user: User) {

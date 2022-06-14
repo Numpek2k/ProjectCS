@@ -11,8 +11,10 @@ import {Tokens} from "../../utility/tokens";
 })
 export class LoginComponent implements OnInit {
 
+  incorrectCredentials = false;
+
   loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', {validators: [Validators.required, Validators.email], updateOn: 'blur'}],
       password: ['', Validators.required]
     }
   )
@@ -35,7 +37,14 @@ export class LoginComponent implements OnInit {
 
   onLogin(): void {
     let credentials = this.loginForm.value;
-    this.userService.login(credentials.email, credentials.password).subscribe(tokens => this.successfulLogin(tokens));
+    this.userService.login(credentials.email, credentials.password).subscribe({
+      next: tokens => this.successfulLogin(tokens),
+      error: err => {
+        if(err.status == 401){
+          this.incorrectCredentials = true;
+        }
+      }
+  });
   }
 
   successfulLogin(tokens: Tokens) {
