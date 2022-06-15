@@ -11,20 +11,10 @@ import {Comment} from "../../utility/comment";
 })
 export class HomeComponent implements OnInit {
 
-  doctors: User[]
   comments?: Comment[]
 
   constructor(public userService: UserService,
               private commentService: CommentService) {
-    let doc: User = {
-      name: 'Unknown',
-      surname: 'Doctor',
-      email: 'asas@gmail.com',
-      doctorInfo: {
-        description: 'hakuna matata'
-      }
-    }
-    this.doctors = [doc, doc, doc, doc, doc]
   }
 
   ngOnInit(): void {

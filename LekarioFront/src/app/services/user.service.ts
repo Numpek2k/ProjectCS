@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Tokens} from "../utility/tokens";
 import {Observable} from "rxjs";
 import {BASE_URL} from "../utility/globals";
+import {TokenService} from "./token.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,9 @@ import {BASE_URL} from "../utility/globals";
 export class UserService {
 
   user?: User;
-  tokens?: Tokens;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private tokenService: TokenService) {
   }
 
   getAllUsers(): Observable<User[]> {
@@ -32,16 +33,6 @@ export class UserService {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
     });
-  }
-
-  refresh(): void {
-    let url = BASE_URL + '/token/refresh';
-
-    if (this.tokens === undefined) return;
-    this.http.get<Tokens>(url, {
-      headers: new HttpHeaders()
-        .set('Authorization', this.tokens.refresh_token)
-    }).subscribe(tokens => this.tokens = tokens);
   }
 
   register(user: User, isDoctor: boolean): Observable<User> {
@@ -68,27 +59,11 @@ export class UserService {
   getCurrentUser(): Observable<User> {
     let url = BASE_URL + '/find/user/current';
     return this.http.get<User>(url, {
-      headers: this.getAuthorizationHeader()
+      headers: this.tokenService.getAuthorizationHeader()
     });
   }
 
-  setTokens(tokens: Tokens): void {
-    this.tokens = tokens;
-  }
 
-  logout(): void {
-    this.user = undefined;
-    this.tokens = undefined;
-  }
-
-  isLoggedIn(): boolean {
-    return this.tokens !== undefined;
-  }
-
-  getAuthorizationHeader(): HttpHeaders{
-    if (this.tokens === undefined) throw Error('login first');
-    return new HttpHeaders().set('Authorization', this.tokens.access_token)
-  }
 
   getUsersByProf(prof: string): Observable<User[]>{
     let url = BASE_URL + '/find/user/prof';

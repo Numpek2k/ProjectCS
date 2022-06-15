@@ -31,7 +31,7 @@ import { CommentHolderComponent } from './components/comment-holder/comment-hold
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
   providers: [],
   bootstrap: [AppComponent]

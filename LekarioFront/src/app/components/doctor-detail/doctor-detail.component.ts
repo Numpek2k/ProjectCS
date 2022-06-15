@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {User} from "../../utility/user";
 import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../services/user.service";
-import {FormControl, FormGroup} from "@angular/forms";
+import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 import {Comment} from "../../utility/comment";
 import {CommentService} from "../../services/comment.service";
 
@@ -15,8 +15,8 @@ export class DoctorDetailComponent implements OnInit {
 
   doctor?: User;
   comments?: Comment[];
-  radioButtons = new FormGroup({
-    state: new FormControl('info')
+  radioButtons = new UntypedFormGroup({
+    state: new UntypedFormControl('info')
   })
 
   constructor(private route: ActivatedRoute,
