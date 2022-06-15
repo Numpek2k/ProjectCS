@@ -6,12 +6,18 @@
         <div class="form-floating mt-2">
           <input type="email" id="email" formControlName="email" class="form-control h2" placeholder="E-mail">
           <label for="email">E-mail</label>
+          <div *ngIf="email.errors?.['email']">
+            This e-mail is incorrect
+          </div>
         </div>
         <div class="form-floating">
           <input type="password" id="password" formControlName="password" class="form-control h2" placeholder="password">
           <label for="password">Password</label>
         </div>
-        <button type="submit" [disabled]="!loginForm.valid" class="btn btn-default mt-1 w-100 fs-4">Login</button>
+        <div *ngIf="incorrectCredentials" class="form-floating rounded err-color">
+          Incorrect credentials
+        </div>
+        <button type="submit" [disabled]="!loginForm.valid" class="btn btn-default mt-2 w-100 fs-4">Login</button>
       </form>
     </div>
   </div>

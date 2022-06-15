@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
+import {TokenService} from "../../services/token.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,7 +11,7 @@ import {UserService} from "../../services/user.service";
 export class NavBarComponent implements OnInit {
 
   constructor(public router: Router,
-              public userService: UserService) {
+              public tokenService: TokenService) {
   }
 
   ngOnInit(): void {
@@ -22,7 +23,7 @@ export class NavBarComponent implements OnInit {
   }
 
   logout(): void {
-    this.userService.logout()
+    this.tokenService.logout();
   }
 
 }

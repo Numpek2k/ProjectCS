@@ -50,6 +50,9 @@
             </div>
           </div>
         </div>
+        <div *ngIf="userExists" class="form-floating rounded err-color my-2">
+          Account with this e-mail already exists
+        </div>
         <button type="submit" [disabled]="!registerForm.valid" class="btn btn-default mt-1 w-100 fs-4">Register</button>
       </form>
     </div>

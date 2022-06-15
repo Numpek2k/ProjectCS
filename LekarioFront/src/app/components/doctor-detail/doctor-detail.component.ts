@@ -34,7 +34,7 @@ export class DoctorDetailComponent implements OnInit {
     }
   )
 
-  get state() {
+  get state(){
     return this.radioButtons.controls['state']
   }
 

@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {UserService} from "../../services/user.service";
 import {User} from "../../utility/user";
 import {Router} from "@angular/router";
 import {samePasswordValidator} from "../../utility/validatePassword";
+import {TokenService} from "../../services/token.service";
 
 @Component({
   selector: 'app-register',
@@ -19,10 +20,13 @@ export class RegisterComponent implements OnInit {
     password2: ['', {validators: Validators.required, updateOn: 'blur'}],
     email: ['', {validators: [Validators.email, Validators.required], updateOn: 'blur'}],
     role: ['patient', Validators.required]
-  }, {validators: samePasswordValidator})
+  }, {validators: samePasswordValidator});
 
-  constructor(private formBuilder: FormBuilder,
+  userExists = false;
+
+  constructor(private formBuilder: UntypedFormBuilder,
               private userService: UserService,
+              private tokenService: TokenService,
               private router: Router) {
   }
 
@@ -56,12 +60,15 @@ export class RegisterComponent implements OnInit {
       email: this.email.value,
     }
     this.userService.register(user, this.role.value === 'doctor')
-      .subscribe(user => this.successfulRegister(user));
+      .subscribe({
+        next: user => this.successfulRegister(user),
+        error: err => this.userExists = true
+      });
   }
 
   successfulRegister(user: User) {
     this.userService.user = user;
-    this.userService.login(user.email, this.password.value).subscribe(tokens => this.userService.setTokens(tokens))
+    this.userService.login(user.email, this.password.value).subscribe(tokens => this.tokenService.setTokens(tokens))
     this.router.navigate(['/']);
   }
 }
