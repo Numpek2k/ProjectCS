@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Tokens} from "../utility/tokens";
 import {Observable} from "rxjs";
 import {BASE_URL} from "../utility/globals";
+import {TokenService} from "./token.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class UserService {
   user?: User;
   tokens?: Tokens;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private tokenService: TokenService) {
   }
 
   getAllUsers(): Observable<User[]> {
@@ -74,6 +76,7 @@ export class UserService {
 
   setTokens(tokens: Tokens): void {
     this.tokens = tokens;
+    this.tokenService.setTokens(tokens);
   }
 
   logout(): void {
