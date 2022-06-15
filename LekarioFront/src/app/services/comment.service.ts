@@ -18,7 +18,7 @@ export class CommentService {
 
   addComment(comment: Comment): void{
     let url = BASE_URL + '/comment/add';
-    this.http.post(url, comment);
+    this.http.post(url, comment).subscribe();
   }
 
   getCommentsAboutDoctor(id: number): Observable<Comment[]>{

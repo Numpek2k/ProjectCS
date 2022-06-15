@@ -11,16 +11,16 @@ import {Tokens} from "../../utility/tokens";
 })
 export class LoginComponent implements OnInit {
 
+  constructor(private formBuilder: FormBuilder,
+              public userService: UserService,
+              private router: Router) {
+  }
+
   loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     }
   )
-
-  constructor(private formBuilder: FormBuilder,
-              public userService: UserService,
-              private router: Router) {
-  }
 
   ngOnInit(): void {
   }
