@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
 import {Tokens} from "../../utility/tokens";
+import {TokenService} from "../../services/token.service";
 
 @Component({
   selector: 'app-login',
@@ -19,8 +20,9 @@ export class LoginComponent implements OnInit {
     }
   )
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
               public userService: UserService,
+              private tokenService: TokenService,
               private router: Router) {
   }
 
@@ -48,7 +50,7 @@ export class LoginComponent implements OnInit {
   }
 
   successfulLogin(tokens: Tokens) {
-    this.userService.setTokens(tokens);
+    this.tokenService.setTokens(tokens);
     this.userService.getCurrentUser().subscribe(user => this.userService.user = user);
     this.router.navigate(['/']);
   }

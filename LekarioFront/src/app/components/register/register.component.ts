@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {UserService} from "../../services/user.service";
 import {User} from "../../utility/user";
 import {Router} from "@angular/router";
 import {samePasswordValidator} from "../../utility/validatePassword";
+import {TokenService} from "../../services/token.service";
 
 @Component({
   selector: 'app-register',
@@ -23,8 +24,9 @@ export class RegisterComponent implements OnInit {
 
   userExists = false;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
               private userService: UserService,
+              private tokenService: TokenService,
               private router: Router) {
   }
 
@@ -66,7 +68,7 @@ export class RegisterComponent implements OnInit {
 
   successfulRegister(user: User) {
     this.userService.user = user;
-    this.userService.login(user.email, this.password.value).subscribe(tokens => this.userService.setTokens(tokens))
+    this.userService.login(user.email, this.password.value).subscribe(tokens => this.tokenService.setTokens(tokens))
     this.router.navigate(['/']);
   }
 }
