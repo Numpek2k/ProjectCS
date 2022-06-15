@@ -18,12 +18,13 @@ export class TokenService {
     localStorage.setItem('refresh_token', tokens.refresh_token);
   }
 
-  getToken(): string{
+  getToken(): string | null{
     let token = localStorage.getItem('access_token');
-    if (!token) throw Error('log in first');
+    if (!token) return null;
     let exp = jwtDecode<{ [key: string]: string }>(token)['exp']
     if ((parseInt(exp) * 1000) - Date.now() < 500) {
-      this.refresh()
+      this.refresh();
+      token = localStorage.getItem('access_token');
     }
     return token;
   }
@@ -33,9 +34,7 @@ export class TokenService {
     let token = localStorage.getItem('refresh_token');
     if (!token) return;
     let exp = jwtDecode<{ [key: string]: string }>(token)['exp']
-    if ((parseInt(exp) * 1000) - Date.now() < 500) {
-      this.router.navigate(['/login']);
-    }
+    if ((parseInt(exp) * 1000) - Date.now() < 500) return;
     this.http.get<Tokens>(url, {
       headers: new HttpHeaders()
         .set('Authorization', token)
@@ -52,6 +51,10 @@ export class TokenService {
 
   getAuthorizationHeader(): HttpHeaders{
     let token = this.getToken();
+    if(!token) {
+      this.router.navigate(['/login']);
+      throw Error('login first');
+    }
     return new HttpHeaders().set('Authorization', token)
   }
 }
