@@ -18,7 +18,7 @@ public class MessageController {
     private final MessageServiceImpl messageServiceImpl;
 
     @PostMapping("/save")
-    public ResponseEntity<Message> saveMessage(@RequestParam Principal user,
+    public ResponseEntity<Message> saveMessage(Principal user,
                                                @RequestParam Integer targetId,
                                                @RequestBody Message message) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/message/save").toUriString());

@@ -26,10 +26,10 @@ export class SearchService {
     this.http.patch(url, {}, {params: httpParams})
   }
 
-  getDocByProf(prof: string): Observable<User>{
-    let url = BASE_URL + '/find/user';
+  getDocByProf(prof: string): Observable<User[]>{
+    let url = BASE_URL + '/find/user/prof';
     let httpParams = new HttpParams()
       .set('prof', prof);
-    return this.http.get<User>(url, {params: httpParams});
+    return this.http.get<User[]>(url, {params: httpParams});
   }
 }
