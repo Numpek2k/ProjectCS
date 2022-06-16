@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {User} from "../utility/user";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Tokens} from "../utility/tokens";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {BASE_URL} from "../utility/globals";
 import {TokenService} from "./token.service";
 
@@ -64,11 +64,17 @@ export class UserService {
   }
 
 
-
-  getUsersByProf(prof: string): Observable<User[]>{
+  getUsersByProf(prof: string): Observable<User[]> {
     let url = BASE_URL + '/find/user/prof';
     let httpParams = new HttpParams()
       .set('prof', prof);
     return this.http.get<User[]>(url, {params: httpParams});
+  }
+
+  getUser(): Observable<User>{
+    if (this.user) {
+      return of<User>(this.user)
+    }
+    return this.getCurrentUser();
   }
 }

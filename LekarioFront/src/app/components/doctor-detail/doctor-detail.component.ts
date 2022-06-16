@@ -30,7 +30,7 @@ export class DoctorDetailComponent implements OnInit {
 
   opinionForm = this.formBuilder.group({
       content: ['', Validators.required],
-      rating: ['', Validators.required],
+      rating: [1, Validators.required],
     }
   )
 
@@ -55,22 +55,28 @@ export class DoctorDetailComponent implements OnInit {
   }
 
   onAddOpinion(): void {
-    let user = this.userService.user
-    if (!user) {
-      this.router.navigate(['/login']);
-      return;
-    }
+    let content = this.opinionForm.controls['content'].value;
+    let rating = this.opinionForm.controls['rating'].value;
+    this.userService.getUser().subscribe(user => {
+      if (!this.doctor) {
+        return;
+      }
 
-    if (!this.doctor) {
-      return;
-    }
+      if (!content)
+        content = '';
 
-    let comment: Comment = {
-      content: this.opinionForm.controls['content'].value,
-      rating: this.opinionForm.controls['rating'].value,
-      idPatient: user,
-      idDoctor: this.doctor
-    }
-    this.commentService.addComment(comment);
+      if (!rating)
+        rating = 1;
+
+      let comment: Comment = {
+        content: content,
+        rating: rating,
+        idPatient: user,
+        idDoctor: this.doctor
+      }
+      this.commentService.addComment(comment);
+    })
+
+
   }
 }
