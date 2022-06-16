@@ -29,12 +29,15 @@ export class TokenService {
     return token;
   }
 
-  refresh(): void {
+  refresh() {
     let url = BASE_URL + '/token/refresh';
     let token = localStorage.getItem('refresh_token');
     if (!token) return;
     let exp = jwtDecode<{ [key: string]: string }>(token)['exp']
-    if ((parseInt(exp) * 1000) - Date.now() < 500) return;
+    if ((parseInt(exp) * 1000) - Date.now() < 500) {
+      this.logout()
+      return;
+    }
     this.http.get<Tokens>(url, {
       headers: new HttpHeaders()
         .set('Authorization', token)

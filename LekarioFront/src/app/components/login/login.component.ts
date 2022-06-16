@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
 
   successfulLogin(tokens: Tokens) {
     this.tokenService.setTokens(tokens);
-    this.userService.getCurrentUser().subscribe(user => this.userService.user = user);
+    this.userService.getCurrentUser();
     this.router.navigate(['/']);
   }
 }
