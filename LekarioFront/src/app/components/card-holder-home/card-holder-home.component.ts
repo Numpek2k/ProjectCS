@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { RATING_UTILS } from 'src/scripts';
 import {Comment} from "../../utility/comment";
 
 @Component({
@@ -9,9 +10,11 @@ import {Comment} from "../../utility/comment";
 export class CardHolderHomeComponent implements OnInit {
 
   @Input() comment!: Comment
+  rating: any
   constructor() { }
 
   ngOnInit(): void {
+    this.rating = RATING_UTILS.convertIntToStars(this.comment.rating)
   }
 
 }
