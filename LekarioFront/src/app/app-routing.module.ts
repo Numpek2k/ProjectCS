@@ -5,6 +5,7 @@ import {DoctorDetailComponent} from "./components/doctor-detail/doctor-detail.co
 import {RegisterComponent} from "./components/register/register.component";
 import {HomeComponent} from "./components/home/home.component";
 import {SearchComponent} from "./components/search/search.component";
+import {ChatComponent} from "./components/chat/chat.component";
 
 const routes: Routes = [
   {path: 'doctor/:id', component: DoctorDetailComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'home', component: HomeComponent},
   {path: 'search', component: SearchComponent},
+  {path: 'chat', component: ChatComponent},
   {path: '', redirectTo:'/home', pathMatch: 'full'}
 ];
 
