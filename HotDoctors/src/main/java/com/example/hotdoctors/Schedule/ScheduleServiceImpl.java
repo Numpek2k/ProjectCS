@@ -20,18 +20,10 @@ public class ScheduleServiceImpl implements ScheduleService{
     private final UserServiceImpl userService;
 
     @Override
-    public List<Schedule> getSchedule(Integer id, Date from, Date to) {
-        Users u = userService.findUserById(id);
-        List<Schedule> schedule = scheduleRepo.getSchedule(u, from, to);
-
-        if (schedule.isEmpty()) return schedule = new ArrayList<>();
-        else return schedule;
-    }
-
-    @Override
     public List<Schedule> getSchedule(Integer id) {
         Users u = userService.findUserById(id);
-        List<Schedule> schedule = scheduleRepo.findAllByUser(u);
+        List<Schedule> schedule = scheduleRepo.getSchedule(u);
+
         if (schedule.isEmpty()) return schedule = new ArrayList<>();
         else return schedule;
     }
@@ -40,22 +32,18 @@ public class ScheduleServiceImpl implements ScheduleService{
     public Schedule setSchedule(Principal user, Schedule schedule) {
         Users u = userService.getCurrentUser(user);
         List<Schedule> scheduleList = getSchedule(u.getId());
-        boolean allowed = true;
+        Schedule original = new Schedule();
 
+        boolean exists = false;
         for (Schedule s : scheduleList)
-            if (s.getDate().equals(schedule.getDate())) allowed = false;
+            if (s.getDay() == schedule.getDay()) { exists = true; original = s; break; }
 
-        if (allowed) return scheduleRepo.save(schedule);
-        else return null;
-    }
+        if (exists) {
+            if (schedule.getDay() != null) original.setDay(schedule.getDay());
+            if (schedule.getH_start() != null) original.setH_start(schedule.getH_start());
+            if (schedule.getH_end() != null) original.setH_end(schedule.getH_end());
+        } else original = schedule;
 
-    @Override
-    public Schedule updateSchedule(Integer id, Schedule schedule) {
-        Schedule original = scheduleRepo.findById(id).orElseThrow();
-        if (schedule.getDay() != null) original.setDay(schedule.getDay());
-        if (schedule.getDate() != null) original.setDate(schedule.getDate());
-        if (schedule.getH_start() != null) original.setH_start(schedule.getH_start());
-        if (schedule.getH_end() != null) original.setH_end(schedule.getH_end());
         return scheduleRepo.save(original);
     }
 }
