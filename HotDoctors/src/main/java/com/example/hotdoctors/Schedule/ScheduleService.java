@@ -8,10 +8,7 @@ import java.util.List;
 
 public interface ScheduleService {
 
-    List<Schedule> getSchedule(Integer id, Date from, Date to);
     List<Schedule> getSchedule(Integer id);
 
     Schedule setSchedule(Principal user, Schedule schedule);
-
-    Schedule updateSchedule(Integer id, Schedule schedule);
 }

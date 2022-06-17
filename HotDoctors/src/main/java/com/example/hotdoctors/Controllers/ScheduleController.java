@@ -18,13 +18,6 @@ public class ScheduleController {
     private final ScheduleServiceImpl scheduleServiceImpl;
 
     @GetMapping("/get")
-    public ResponseEntity<List<Schedule>> getSchedule(Integer id,
-                                                      @RequestParam Date from,
-                                                      @RequestParam Date to) {
-        return ResponseEntity.ok().body(scheduleServiceImpl.getSchedule(id, from, to));
-    }
-
-    @GetMapping("/get/all")
     public ResponseEntity<List<Schedule>> getSchedule(Integer id) {
         return ResponseEntity.ok().body(scheduleServiceImpl.getSchedule(id));
     }
@@ -33,11 +26,5 @@ public class ScheduleController {
     public ResponseEntity<Schedule> setSchedule(Principal user, Schedule schedule) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/schedule/set").toUriString());
         return ResponseEntity.created(uri).body(scheduleServiceImpl.setSchedule(user, schedule));
-    }
-
-    @PatchMapping("/add/role")
-    public ResponseEntity<Schedule> updateSchedule(Integer id, Schedule schedule) {
-        scheduleServiceImpl.updateSchedule(id, schedule);
-        return ResponseEntity.ok().build();
     }
 }

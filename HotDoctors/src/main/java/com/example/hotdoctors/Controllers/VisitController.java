@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -26,8 +27,13 @@ public class VisitController {
         return ResponseEntity.ok().body(visitServiceImpl.getAllVisits(id, start, end));
     }
 
+    @GetMapping("/get/all/pending")
+    public ResponseEntity<List<Visit>> getAllPending(Principal user) {
+        return ResponseEntity.ok().body(visitServiceImpl.getAllPending(user));
+    }
+
     @PostMapping("/save")
-    public ResponseEntity<Visit> registerVisit(Visit visit) {
+    public ResponseEntity<Visit> registerVisit(@RequestBody Visit visit) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/save/prof").toUriString());
         return ResponseEntity.created(uri).body(visitServiceImpl.registerVisit(visit));
     }
@@ -36,7 +42,7 @@ public class VisitController {
     public void deleteVisit(Integer id) { visitServiceImpl.cancelVisit(id); }
 
     @PatchMapping("/update")
-    public ResponseEntity<?> updateVisit(Integer visitId, Visit visit) {
+    public ResponseEntity<?> updateVisit(Integer visitId, @RequestBody Visit visit) {
         visitServiceImpl.updateVisit(visitId, visit);
         return ResponseEntity.ok().build();
     }

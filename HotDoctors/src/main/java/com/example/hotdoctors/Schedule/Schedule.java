@@ -20,9 +20,6 @@ public class Schedule {
     @NotBlank
     private DayOfWeek day;
 
-    @Temporal(TemporalType.DATE)
-    private Date date;
-
     private Integer h_start;
 
     private Integer h_end;

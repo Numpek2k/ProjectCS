@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface ScheduleRepository extends JpaRepository <Schedule, Integer> {
 
-    @Query("SELECT o FROM Schedule o WHERE o.user = ?1 AND o.date >= ?2 AND o.date <= ?3")
-    List<Schedule> getSchedule(Users user, Date From, Date to);
+    @Query(value = "SELECT o FROM Schedule o WHERE o.user = ?1")
+    List<Schedule> getSchedule(Users user);
 
-    List<Schedule> findAllByUser(Users user);
-
+    @Query(value = "SELECT o FROM Schedule o WHERE o.user = ?1 AND o.day = ?2")
+    Schedule findByDay(Users user, Integer id);
 }

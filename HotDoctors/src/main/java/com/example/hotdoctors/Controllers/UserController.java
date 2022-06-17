@@ -91,33 +91,47 @@ public class UserController {
 
     @GetMapping("/find/prof")
     public ResponseEntity<Profession> findProf(Integer id) {
-        return ResponseEntity.ok().body(userServiceImpl.findProfById(id));
+        Profession prof = userServiceImpl.findProfById(id);
+        if (prof == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(prof);
     }
     @GetMapping("/find/user/id")
     public ResponseEntity<Users> findUser(Integer id) {
-        return ResponseEntity.ok().body(userServiceImpl.findUserById(id));
+        Users user = userServiceImpl.findUserById(id);
+        if (user == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(user);
     }
     @GetMapping("/find/user/email")
     public ResponseEntity<Users> findUser(String email) {
-        return ResponseEntity.ok().body(userServiceImpl.findUserByEmail(email));
+        Users user = userServiceImpl.findUserByEmail(email);
+        if (user == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(user);
     }
     @GetMapping("/find/role")
     public ResponseEntity<Role> findRole(Integer id) {
-        return ResponseEntity.ok().body(userServiceImpl.findRoleById(id));
+        Role role = userServiceImpl.findRoleById(id);
+        if (role == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(role);
     }
 
 
     @GetMapping("/find/user/all")
     public ResponseEntity<List<Users>> findUserAll() {
-        return ResponseEntity.ok().body(userServiceImpl.findAllUsers());
+        List<Users> userList = userServiceImpl.findAllUsers();
+        if (userList == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(userList);
     }
     @GetMapping("find/role/all")
     public ResponseEntity<List<Role>> findRoleAll() {
-        return ResponseEntity.ok().body(userServiceImpl.findAllRoles());
+        List<Role> roleList = userServiceImpl.findAllRoles();
+        if (roleList == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(roleList);
     }
     @GetMapping("/find/prof/all")
     public ResponseEntity<List<Profession>> findProfAll() {
-        return ResponseEntity.ok().body(userServiceImpl.findAllProf());
+        List<Profession> profList = userServiceImpl.findAllProf();
+        if (profList == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(profList);
     }
 
 
