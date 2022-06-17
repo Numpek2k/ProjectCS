@@ -13,15 +13,25 @@ export class VisitService {
   constructor(private http: HttpClient,
               private token: TokenService) { }
 
-  getDoctorVisit(id: number, start: string, end: string): Observable<Visit[]>{
+  getDoctorVisit(id: number): Observable<Visit[]>{
     let url = BASE_URL + '/visit/get/all'
-    let params = new HttpParams()
-      .set('id', id)
-      .set('start', start)
-      .set('end', end);
     return this.http.get<Visit[]>(url,{
-      params: params
+      params: new HttpParams().set('id', id)
     });
   }
 
+  update(visitId: number, visit: Visit): void{
+    let url = BASE_URL + '/visit/update';
+    this.http.patch(url, visit, {
+      params: new HttpParams().set('visitId', visitId),
+      headers: this.token.getAuthorizationHeader()
+    }).subscribe();
+  }
+
+  register(visit: Visit): Observable<Visit>{
+    let url = BASE_URL + '/visit/save';
+    let request = this.http.post<Visit>(url, visit);
+    request.subscribe();
+    return request;
+  }
 }
