@@ -24,13 +24,6 @@ export class ScheduleService {
     return request;
   }
 
-  update(id: number, schedule: Schedule): void {
-    let url = BASE_URL + 'schedule/update';
-    this.http.patch<Schedule>(url, schedule, {
-      headers: this.token.getAuthorizationHeader()
-    }).subscribe()
-  }
-
   get(id: number): Observable<Schedule[]> {
     let url = BASE_URL + 'schedule/get';
     return this.http.get<Schedule[]>(url, {
