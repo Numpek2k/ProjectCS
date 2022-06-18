@@ -4,6 +4,7 @@ import {BASE_URL} from "../utility/globals";
 import {Message} from "../utility/message";
 import {TokenService} from "./token.service";
 import {Observable} from "rxjs";
+import {User} from "../utility/user";
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,22 @@ export class MessageService {
     return this.http.get<Message[]>(url, {
       headers: this.token.getAuthorizationHeader(),
       params: params
+    })
+  }
+
+  getAllMessages(target: number): Observable<Message[]>{
+    let url = BASE_URL + '/message/get/usertouser';
+    let params = new HttpParams().set('targetId', target);
+    return this.http.get<Message[]>(url,{
+      headers: this.token.getAuthorizationHeader(),
+      params: params
+    })
+  }
+
+  getCorrespondents(): Observable<User[]>{
+    let url = BASE_URL + '/message/get/correspondents';
+    return this.http.get<User[]>(url,{
+      headers: this.token.getAuthorizationHeader(),
     })
   }
 }

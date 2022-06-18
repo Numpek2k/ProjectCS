@@ -2,6 +2,7 @@ package com.example.hotdoctors.Controllers;
 
 import com.example.hotdoctors.Message.Message;
 import com.example.hotdoctors.Message.MessageServiceImpl;
+import com.example.hotdoctors.Users.users.Users;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -41,4 +42,15 @@ public class MessageController {
     public ResponseEntity<List<Message>> getAllUnreadFromChat(Principal user, Integer targetId) {
         return ResponseEntity.ok().body(messageServiceImpl.getAllUnreadFromChat(user, targetId));
     }
+
+    @GetMapping("/get/usertouser")
+    public ResponseEntity<List<Message>> getUserMessages(Principal user, Integer targetId){
+        return ResponseEntity.ok().body(messageServiceImpl.getUserToUserMessages(user, targetId));
+    }
+
+    @GetMapping("/get/correspondents")
+    public ResponseEntity<List<Users>> getCorrespondents(Principal user){
+        return ResponseEntity.ok().body(messageServiceImpl.getCorrespondents(user));
+    }
+
 }

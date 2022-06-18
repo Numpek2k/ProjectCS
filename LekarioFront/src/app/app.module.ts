@@ -15,6 +15,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { CommentHolderComponent } from './components/comment-holder/comment-holder.component';
 import { ChatComponent } from './components/chat/chat.component';
 import {NgxPrettyDateModule} from "ngx-pretty-date";
+import { MessagesComponent } from './components/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {NgxPrettyDateModule} from "ngx-pretty-date";
     CardHolderSearchComponent,
     CommentHolderComponent,
     ChatComponent,
+    MessagesComponent,
   ],
     imports: [
         BrowserModule,

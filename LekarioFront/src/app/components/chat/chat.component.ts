@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder} from "@angular/forms";
 import { MessageService } from 'src/app/services/message.service';
 import {UserService} from "../../services/user.service";
-import {Message} from "../../utility/message";
-import {Router} from "@angular/router";
+import {User} from "../../utility/user";
 
 @Component({
   selector: 'app-chat',
@@ -17,24 +16,19 @@ export class ChatComponent implements OnInit {
               private messageService: MessageService,
   ) { }
 
-  messageForm = this.formBuilder.group({
-    content:['',Validators.required],
-    target:['',Validators.required]
-  })
+  correspondents?: User[]
+  id: any
+
 
   ngOnInit(): void {
+    this.messageService.getCorrespondents().subscribe(correspondents => {
+      this.correspondents = correspondents
+      this.id = correspondents[0].id
+    })
   }
 
-  onSendMessage(id: any): void {
-    let content = this.messageForm.controls['content'].value;
-    if(!content)
-      return;
-
-    let message: Message = {
-      content: content
-    }
-    this.messageService.send(message,id);
-    window.location.reload();
+  onButtonClick(idUser: any): void {
+    this.id = idUser
   }
 
 }
