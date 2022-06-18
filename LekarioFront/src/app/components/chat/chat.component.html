@@ -1,0 +1,19 @@
+<div class="mt-1">
+  <div class="row">
+    <div class="card col-2 shadow message-people align-middle">
+
+      <ng-template ngFor let-user [ngForOf]="correspondents">
+        <button class="w-75 ms-4 border-bottom border-0 bg-white" (click)="onButtonClick(user.id)">
+          <div class="">
+            <img class="rounded-3 w-25 my-2 mx-2 float-start" src="assets/patient_icon.png">
+            <div class="mt-3">{{user.name}} {{user.surname}}</div>
+          </div>
+        </button>
+      </ng-template>
+    </div>
+
+    <div class="card offset-1 col-8 shadow message-text">
+      <app-messages [id]="id"></app-messages>
+    </div>
+  </div>
+</div>

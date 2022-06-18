@@ -10,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service @AllArgsConstructor @Slf4j
@@ -67,4 +66,19 @@ public class MessageServiceImpl implements MessageService {
         Users tU = userService.findUserById(targetId);
         return messageRepo.allUnreadFromChat(u, tU);
     }
+
+    @Override
+    public List<Message> getUserToUserMessages(Principal user, Integer targetId){
+        Users u = userService.getCurrentUser(user);
+        Users tU = userService.findUserById(targetId);
+        return messageRepo.allUserToUserMessages(u, tU);
+    }
+
+    @Override
+    public List<Users> getCorrespondents(Principal user){
+        Users u = userService.getCurrentUser(user);
+        return messageRepo.allCorrespondents(u);
+    }
+
+
 }

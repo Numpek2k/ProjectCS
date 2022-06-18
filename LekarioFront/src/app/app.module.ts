@@ -13,6 +13,9 @@ import { SearchComponent } from './components/search/search.component';
 import { CardHolderSearchComponent } from './components/card-holder-search/card-holder-search.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { CommentHolderComponent } from './components/comment-holder/comment-holder.component';
+import { ChatComponent } from './components/chat/chat.component';
+import {NgxPrettyDateModule} from "ngx-pretty-date";
+import { MessagesComponent } from './components/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +29,15 @@ import { CommentHolderComponent } from './components/comment-holder/comment-hold
     SearchComponent,
     CardHolderSearchComponent,
     CommentHolderComponent,
+    ChatComponent,
+    MessagesComponent,
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
         ReactiveFormsModule,
+        NgxPrettyDateModule,
     ],
   providers: [],
   bootstrap: [AppComponent]

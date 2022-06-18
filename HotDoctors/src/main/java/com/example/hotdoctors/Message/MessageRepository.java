@@ -22,4 +22,10 @@ public interface MessageRepository extends JpaRepository <Message, Integer> {
 
     @Query(value = "SELECT o FROM Message o WHERE o.idWho = ?1 AND o.idWho = ?2 AND o.read = false ORDER BY o.date")
     List<Message> allUnreadFromChat(Users user, Users targetUser);
+
+    @Query(value = "SELECT o FROM Message o WHERE o.idWho = ?1 AND o.idWhom = ?2 OR o.idWho = ?2 AND o.idWhom = ?1 ORDER BY o.date")
+    List<Message> allUserToUserMessages(Users user, Users targetUser);
+
+    @Query(value = "SELECT DISTINCT o.idWhom FROM Message o WHERE o.idWho = ?1")
+    List<Users> allCorrespondents(Users user);
 }

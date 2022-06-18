@@ -1,9 +1,12 @@
-<div class="position-relative start-50 translate-middle-x w-75 card shadow mt-3">
+<div class="card shadow mt-3">
   <div class="card-title">
     <img class="rounded-3 col-1 float-start my-2 mx-2" alt="..." src="assets/patient_icon.png">
-    <div class="float-start ms-3 my-2">
-      <h5 class="card-title"> {{comment.idPatient.name}} {{comment.idPatient.surname}} <i [innerHTML] = "rating"></i></h5>
-      <div class="text-muted"> {{comment.date}} </div>
+    <div class="float-start ms-3 mt-2">
+      <div class="card-title h6"> {{comment.idPatient.name}} {{comment.idPatient.surname}} <i [innerHTML] = "rating"></i>
+        <br>
+        <span class="text-muted fs-6"> {{comment.date | prettyDate:'dd-mm-yyyy'}} </span>
+      </div>
+
       <p class="card-text"> {{comment.content}} </p>
     </div>
   </div>

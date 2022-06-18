@@ -1,3 +1,5 @@
+import {Comment} from "./app/utility/comment";
+
 export class RATING_UTILS {
   static convertIntToStars(rating: number) {
     let output = String();
@@ -16,5 +18,15 @@ export class RATING_UTILS {
         output = output + `<i class="bi bi-star"></i>`;
     }
     return output;
+  }
+
+  static avgRating(comments?:Comment[]){
+    let total = 0;
+    if(comments == undefined)
+      return 0
+    for (let i = 0; i < comments?.length; i++) {
+      total += comments[i].rating;
+    }
+    return total / comments.length;
   }
 }

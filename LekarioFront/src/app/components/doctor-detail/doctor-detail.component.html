@@ -15,7 +15,7 @@
                 </ng-template>
               </div>
               <div>
-                <p class="card-text"> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i> <i class="bi bi-star"></i> {{comments?.length}} opinions </p>
+                <p class="card-text" [innerHTML] = "avgRating"> {{comments?.length}} opinions </p>
               </div>
               <p class="card-text">{{doctor?.doctorInfo?.description}}</p>
             </div>
@@ -49,10 +49,36 @@
             </div>
           </div>
           <ng-template #isComments>
-            <ng-template ngFor let-comment [ngForOf]="comments">
-              <app-comment-holder [comment] = "comment" [routerLink]="['/doctor', comment.idDoctor.id]"></app-comment-holder>
-            </ng-template>
+            <div class="position-relative start-50 translate-middle-x w-75">
+              <div class="h5"> Add an opinion: </div>
+              <div class="mt-3">
+                <form [formGroup]="opinionForm" (ngSubmit)="onAddOpinion()">
+                  <div>
+                    <div class="input-group">
+                      <span class="col-2"> Your opinion: </span>
+                      <textarea class="form-control" id="content" formControlName="content" aria-label="With textarea"></textarea>
+                    </div>
+                    <div class="input-group mt-3">
+                      <span class="col-2"> Your rating: </span>
+                      <span class="star-rating">
+                      <input type="radio" name="rating" formControlName="rating" value="1" checked><i></i>
+                      <input type="radio" name="rating" formControlName="rating" value="2"><i></i>
+                      <input type="radio" name="rating" formControlName="rating" value="3"><i></i>
+                      <input type="radio" name="rating" formControlName="rating" value="4"><i></i>
+                      <input type="radio" name="rating" formControlName="rating" value="5"><i></i>
+                      </span>
+                    </div>
+                    <button type="submit" class="offset-11 col-md-1 align-self-end btn btn-default">Add</button>
+                  </div>
+
+                </form>
+              </div>
+              <ng-template ngFor let-comment [ngForOf]="comments">
+                <app-comment-holder [comment] = "comment" [routerLink]="['/doctor', comment.idDoctor.id]"></app-comment-holder>
+              </ng-template>
+            </div>
           </ng-template>
+
         </div>
       </div>
     </div>
