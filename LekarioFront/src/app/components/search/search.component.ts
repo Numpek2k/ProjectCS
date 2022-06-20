@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../../services/user.service";
 import {User} from "../../utility/user";
+import {SearchService} from "../../services/search.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-search',
@@ -11,10 +12,15 @@ export class SearchComponent implements OnInit {
 
   doctors?: User[];
 
-  constructor(private userService: UserService) { }
+  constructor(private searchService: SearchService,
+              private router: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.userService.getUsersByProf('Dentist').subscribe(doctors => this.doctors = doctors); //TODO result of search
+    this.router.paramMap.subscribe(paramMap => {
+      let text = paramMap.get('text');
+      if (!text) return;
+      this.searchService.getDoctors(text).subscribe(doctors => this.doctors = doctors);
+    })
   }
 
 }

@@ -32,4 +32,11 @@ export class SearchService {
       .set('prof', prof);
     return this.http.get<User[]>(url, {params: httpParams});
   }
+
+  getDoctors(text: string): Observable<User[]>{
+    let url = BASE_URL + '/find/doc';
+    return this.http.get<User[]>(url,{
+      params: new HttpParams().set('thing', text)
+    });
+  }
 }
