@@ -159,6 +159,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return findUserByEmail(email);
     }
 
+    @Override
+    public List<Users> getDoctors(String thing) {
+        return userRepository.findDoctor(thing);
+    }
+
     public Profession findProfessionByName(String name){
         return profRepository.findProfByName(name);
     }

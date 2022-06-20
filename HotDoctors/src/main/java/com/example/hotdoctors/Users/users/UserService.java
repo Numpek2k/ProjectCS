@@ -36,4 +36,5 @@ public interface UserService {
     void addProfToUser(Integer userId, Integer profId);
 
     Users getCurrentUser(Principal user);
+    List<Users> getDoctors(String thing);
 }
