@@ -3,7 +3,6 @@ import {UserService} from "../../services/user.service";
 import {CommentService} from "../../services/comment.service";
 import {Comment} from "../../utility/comment";
 import {FormBuilder, Validators} from "@angular/forms";
-import {SearchService} from "../../services/search.service";
 import {Router} from "@angular/router";
 
 @Component({
