@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
@@ -112,6 +113,12 @@ public class UserController {
         Role role = userServiceImpl.findRoleById(id);
         if (role == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok().body(role);
+    }
+    @GetMapping("/find/doc")
+    public ResponseEntity<List<Users>> findDocAllBy(String thing) {
+        List<Users> docList = userServiceImpl.getDoctors(thing);
+        if (docList == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(docList);
     }
 
 
