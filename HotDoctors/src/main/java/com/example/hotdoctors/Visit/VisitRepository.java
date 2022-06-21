@@ -11,8 +11,8 @@ import java.util.List;
 @Repository
 public interface VisitRepository extends JpaRepository <Visit, Integer> {
 
-    @Query(value = "SELECT o FROM Visit o WHERE o.idDoctor = ?1 AND o.date >= ?2 AND o.date <= ?3 ORDER BY o.date")
-    List<Visit> findAllByDates(Users user, Date start, Date end);
+    @Query(value = "SELECT o FROM Visit o WHERE o.idDoctor = ?1 ORDER BY o.date")
+    List<Visit> findAll(Users user);
 
     @Query(value = "SELECT o FROM Visit o WHERE o.idDoctor = ?1 AND o.status = ?2")
     List<Visit> findAllPending(Users user, Status status);

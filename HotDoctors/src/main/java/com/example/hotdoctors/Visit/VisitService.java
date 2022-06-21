@@ -10,7 +10,7 @@ public interface VisitService {
 
     Visit registerVisit(Visit visit);
     void cancelVisit(Integer visitId);
-    List<Visit> getAllVisits(Integer id, Date start, Date end);
+    List<Visit> getAllVisits(Integer id);
     List<Visit> getAllPending(Principal user);
     Visit getVisit(Integer visitId);
     void updateVisit(Integer visitId, Visit visit);

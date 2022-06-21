@@ -1,6 +1,7 @@
 package com.example.hotdoctors.Visit;
 
 import com.example.hotdoctors.Users.users.Users;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

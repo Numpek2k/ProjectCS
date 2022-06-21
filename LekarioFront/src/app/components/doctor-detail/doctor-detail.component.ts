@@ -27,31 +27,39 @@ export class DoctorDetailComponent implements OnInit {
     state: new FormControl('info')
   })
   avgRating: any;
+  tomorrow?: any;
 
   opinionForm = this.formBuilder.group({
       content: ['', Validators.required],
       rating: [1, Validators.required],
     }
   )
+  getDate: any;
+  id: any;
 
   get state(){
     return this.radioButtons.controls['state']
   }
 
   ngOnInit(): void {
-    let id = this.route.snapshot.paramMap.get('id');
-    if (id === null) throw Error('id should be a number');
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id === null) throw Error('id should be a number');
 
-    this.userService.getUserById(parseInt(id)).subscribe({
+    this.userService.getUserById(parseInt(this.id)).subscribe({
       next: doc => this.doctor = doc,
       error: err => {
         this.router.navigate(['/'])
       }
     });
-    this.commentService.getCommentsAboutDoctor(parseInt(id)).subscribe(comments => {
+    this.commentService.getCommentsAboutDoctor(parseInt(this.id)).subscribe(comments => {
       this.comments = comments;
       this.avgRating = RATING_UTILS.convertIntToStars(RATING_UTILS.avgRating(comments))
     });
+    this.tomorrow = new Date();
+    let dd = String(this.tomorrow.getDate() + 1).padStart(2, '0');
+    let mm = String(this.tomorrow.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = this.tomorrow.getFullYear();
+    this.tomorrow = yyyy + '-' + mm + '-' + dd;
   }
 
   onAddOpinion(): void {
@@ -77,6 +85,10 @@ export class DoctorDetailComponent implements OnInit {
       this.commentService.addComment(comment);
     })
 
+    }
 
+  onButtonClick(date: any): void {
+    this.getDate = date
   }
+
 }

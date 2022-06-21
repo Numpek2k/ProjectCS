@@ -23,8 +23,8 @@ public class VisitController {
         return ResponseEntity.ok().body(visitServiceImpl.getVisit(id));
     }
     @GetMapping("/get/all")
-    public ResponseEntity<List<Visit>> getAllVisitsFromPeriod(Integer id, Date start, Date end) {
-        return ResponseEntity.ok().body(visitServiceImpl.getAllVisits(id, start, end));
+    public ResponseEntity<List<Visit>> getAllVisitsFromPeriod(Integer id) {
+        return ResponseEntity.ok().body(visitServiceImpl.getAllVisits(id));
     }
 
     @GetMapping("/get/all/pending")

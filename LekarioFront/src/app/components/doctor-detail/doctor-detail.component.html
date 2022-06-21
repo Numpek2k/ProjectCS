@@ -1,4 +1,5 @@
- <div class="container mt-4">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<div class="container mt-4">
   <div class="row">
     <div class="col-md-9 mb-2">
       <div class="card mb-3">
@@ -84,15 +85,19 @@
     </div>
     <div class="col-md-3">
       <div class="card mb-3 h-100">
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-              content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        <h5 class="ms-3 mt-3">
+          Choose date of appointment:
+        </h5>
+        <form class="col-md-8">
+          <div class="col-10 offset-5">
+            <input [(ngModel)]="getDate" type="date" value="{{tomorrow}}" min="{{tomorrow}}" #date>
           </div>
-        </div>
+          <div class="col-10 offset-4">
+            <app-schedule [date]="date.value" [id]="id"></app-schedule>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
+

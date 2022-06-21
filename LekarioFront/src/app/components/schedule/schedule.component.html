@@ -1,0 +1,8 @@
+<div *ngFor="let hour of hours">
+  <button *ngIf="!hour.available" class="btn w-100 bg-danger mt-2" type="button" disabled>
+    {{hour.h}}:00
+  </button>
+  <button *ngIf="hour.available" (click)="onButtonAddVisit(hour.h)"  class="btn w-100 bg-success text-white mt-2" type="button">
+    {{hour.h}}:00
+  </button>
+</div>

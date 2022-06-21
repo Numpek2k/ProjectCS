@@ -11,11 +11,12 @@ import {HomeComponent} from './components/home/home.component';
 import {CardHolderHomeComponent} from "./components/card-holder-home/card-holder-home.component";
 import { SearchComponent } from './components/search/search.component';
 import { CardHolderSearchComponent } from './components/card-holder-search/card-holder-search.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CommentHolderComponent } from './components/comment-holder/comment-holder.component';
 import { ChatComponent } from './components/chat/chat.component';
 import {NgxPrettyDateModule} from "ngx-pretty-date";
 import { MessagesComponent } from './components/messages/messages.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MessagesComponent } from './components/messages/messages.component';
     CommentHolderComponent,
     ChatComponent,
     MessagesComponent,
+    ScheduleComponent,
   ],
     imports: [
         BrowserModule,
@@ -38,6 +40,7 @@ import { MessagesComponent } from './components/messages/messages.component';
         HttpClientModule,
         ReactiveFormsModule,
         NgxPrettyDateModule,
+        FormsModule,
     ],
   providers: [],
   bootstrap: [AppComponent]

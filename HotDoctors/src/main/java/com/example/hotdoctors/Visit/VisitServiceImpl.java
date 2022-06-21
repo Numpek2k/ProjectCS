@@ -1,13 +1,11 @@
 package com.example.hotdoctors.Visit;
 
-import com.example.hotdoctors.Schedule.ScheduleRepository;
 import com.example.hotdoctors.Users.users.UserServiceImpl;
 import com.example.hotdoctors.Users.users.Users;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -34,9 +32,9 @@ public class VisitServiceImpl implements VisitService {
 
 
     @Override
-    public List<Visit> getAllVisits(Integer userId, Date start, Date end) {
+    public List<Visit> getAllVisits(Integer userId) {
         Users u = userService.findUserById(userId);
-        return visitRepository.findAllByDates(u, start, end);
+        return visitRepository.findAll(u);
     }
     @Override
     public List<Visit> getAllPending(Principal user) {
