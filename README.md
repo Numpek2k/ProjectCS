@@ -20,9 +20,9 @@ Group members:\
 # Passwords
 
 
-| Email                     | Password |
-|---------------------------|----------|
-| januszgrzesznik@gmail.com | patient  |
-| realdoc@gmail.com         | doctor   |
+| Email                     | Password  |
+|---------------------------|-----------|
+| januszgrzesznik@gmail.com | patient   |
+| doctortest@wp.pl          | doctortest|
 
 
