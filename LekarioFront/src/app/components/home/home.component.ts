@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../services/user.service";
 import {CommentService} from "../../services/comment.service";
 import {Comment} from "../../utility/comment";
+import {SearchService} from "../../services/search.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -12,13 +13,19 @@ export class HomeComponent implements OnInit {
 
   comments?: Comment[]
 
-  constructor(public userService: UserService,
-              private commentService: CommentService) {
+  constructor(private commentService: CommentService,
+              private searchService: SearchService,
+              private router: Router
+              ) {
   }
 
   ngOnInit(): void {
     this.commentService.getNewestComments().subscribe(comments => this.comments = comments);
   }
 
+  onButtonSetQuestion(q: string): void {
+    this.searchService.changeQ(q);
+    this.router.navigate(["/search"])
+  }
 
 }

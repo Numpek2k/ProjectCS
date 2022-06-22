@@ -44,8 +44,11 @@ export class ScheduleComponent implements OnInit {
       this.schedule = this.doctorSchedule?.find((obj) => {
         return obj.day == this.dayOfWeek;
       });
-      if (!this.schedule)
+      if (!this.schedule) {
+        this.hours = undefined
         return;
+      }
+
       let ho = [];
       for (let i = this.schedule?.h_start; i < this.schedule?.h_end; i++) {
         let o = {h: i, available: true};
@@ -78,8 +81,10 @@ export class ScheduleComponent implements OnInit {
     this.schedule = this.doctorSchedule?.find((obj) => {
       return obj.day == this.dayOfWeek;
     });
-    if (!this.schedule)
+    if (!this.schedule) {
+      this.hours = undefined
       return;
+    }
     let ho = [];
     for (let i = this.schedule?.h_start; i < this.schedule?.h_end; i++) {
       let o = {h: i, available: true};
@@ -101,18 +106,20 @@ export class ScheduleComponent implements OnInit {
     })
   }
 
-  onButtonAddVisit(hour: number) {
+  onButtonAddVisit(hour: number, desc: string) {
     this.userService.getUser().subscribe(user => {
       if(!this.schedule)
         return;
       let d = formatDate(new Date(this.date), 'yyyy-MM-dd','en_US')
       let visit: Visit = {
         date: d,
+        description: desc,
         h_start: hour,
         idDoctor: this.schedule.user,
         idPatient: user
       }
       this.visitService.register(visit);
+      window.location.reload()
 
     })
   }

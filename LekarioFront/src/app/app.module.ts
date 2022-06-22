@@ -17,6 +17,8 @@ import { ChatComponent } from './components/chat/chat.component';
 import {NgxPrettyDateModule} from "ngx-pretty-date";
 import { MessagesComponent } from './components/messages/messages.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { AppointmentsComponent } from './components/appointments/appointments.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { ScheduleComponent } from './components/schedule/schedule.component';
     ChatComponent,
     MessagesComponent,
     ScheduleComponent,
+    SettingsComponent,
+    AppointmentsComponent,
   ],
     imports: [
         BrowserModule,

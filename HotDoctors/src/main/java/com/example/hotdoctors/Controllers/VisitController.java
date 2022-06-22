@@ -34,8 +34,10 @@ public class VisitController {
 
     @PostMapping("/save")
     public ResponseEntity<Visit> registerVisit(@RequestBody Visit visit) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/save/prof").toUriString());
-        return ResponseEntity.created(uri).body(visitServiceImpl.registerVisit(visit));
+//        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/save/prof").toUriString());
+//        return ResponseEntity.created(uri).body(visitServiceImpl.registerVisit(visit));
+
+        return ResponseEntity.ok(visitServiceImpl.registerVisit(visit));
     }
 
     @DeleteMapping("/delete")

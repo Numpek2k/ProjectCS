@@ -23,7 +23,7 @@ public class ScheduleController {
     }
 
     @PostMapping("/set")
-    public ResponseEntity<Schedule> setSchedule(Principal user, Schedule schedule) {
+    public ResponseEntity<Schedule> setSchedule(Principal user, @RequestBody Schedule schedule) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/schedule/set").toUriString());
         return ResponseEntity.created(uri).body(scheduleServiceImpl.setSchedule(user, schedule));
     }

@@ -1,8 +1,7 @@
 <div class="bg-light mt-4">
   <div class="position-relative start-50 translate-middle-x w-75">
-    <h2>Ginekolog Warszawa</h2>
+    <h2>Results for: {{question}}</h2>
 
-<!--TODO: for all results show this-->
     <ng-template ngFor let-doc [ngForOf]="doctors">
       <app-card-holder-search [doctor]="doc" [routerLink]="['/doctor', doc.id]"></app-card-holder-search>
     </ng-template>

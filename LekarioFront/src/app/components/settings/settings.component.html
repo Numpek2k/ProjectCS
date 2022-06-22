@@ -1,0 +1,72 @@
+<div class="container card mt-5 col-8 offset-2">
+  <div class="row">
+    <div class="card-body col-6">
+      <h2 class="card-title">
+        Settings
+      </h2>
+      <h4 class="card-title">
+        Basic:
+      </h4>
+      <label class="form-label">Name</label>
+      <input type="text" class="form-control" placeholder="{{currentUser?.name}}" #name>
+      <label class="form-label mt-2">Address</label>
+      <input type="text" class="form-control" placeholder="{{currentUser?.doctorInfo?.address}}" #address>
+    </div>
+    <div class="mt-5 pt-5 card-body col-6">
+      <label class="form-label mt-1">Surname</label>
+      <input type="text" class="form-control" placeholder="{{currentUser?.surname}}" #surname>
+      <label class="form-label mt-2">Description</label>
+      <input type="text" class="form-control" placeholder="{{currentUser?.doctorInfo?.description}}" #desc>
+    </div>
+  </div>
+  <button *ngIf="currentUser?.role?.name == 'PATIENT'" class="btn btn-secondary" (click)="onButtonUpdate(name.value,surname.value,address.value,desc.value)">Save changes</button>
+  <div *ngIf="currentUser?.role?.name == 'DOCTOR'" class="row">
+    <h4 class="card-title">
+      Schedule:
+    </h4>
+    <div class="card-body row">
+      <div class="col-2 ms-5">
+        <label class="form-label mt-2 fw-bold">Monday</label>
+        <br>
+        Start hour:
+        <input class="form-control" max="24" min="1" placeholder="{{monday?.h_start}}" type="number" #ms>
+        End:
+        <input type="number" min="1" max="24" class="form-control" placeholder="{{monday?.h_end}}" #me>
+      </div>
+      <div class="col-2 ms-4">
+        <label class="form-label mt-2 fw-bold">Tuesday</label>
+        <br>
+        Start hour:
+        <input type="number" min="1" max="24" class="form-control" placeholder="{{tuesday?.h_start}}" #tus>
+        End:
+        <input type="number" min="1" max="24" class="form-control" placeholder="{{tuesday?.h_end}}" #tue>
+      </div>
+      <div class="col-2 ms-4">
+        <label class="form-label mt-2 fw-bold">Wednesday</label>
+        <br>
+        Start hour:
+        <input type="number" min="1" max="24" class="form-control" placeholder="{{wednesday?.h_start}}" #ws>
+        End:
+        <input type="number" min="1" max="24" class="form-control" placeholder="{{wednesday?.h_end}}" #we>
+      </div>
+      <div class="col-2 ms-4">
+        <label class="form-label mt-2 fw-bold">Thursday</label>
+        <br>
+        Start hour:
+        <input type="number" min="1" max="24" class="form-control" placeholder="{{thursday?.h_start}}" #ths>
+        End:
+        <input type="number" min="1" max="24" class="form-control" placeholder="{{thursday?.h_end}}" #the>
+      </div>
+      <div class="col-2 ms-4">
+        <label class="form-label mt-2 fw-bold">Friday</label>
+        <br>
+        Start hour:
+        <input type="number" min="1" max="24" class="form-control" placeholder="{{friday?.h_start}}" #fs>
+        End:
+        <input type="number" min="1" max="24" class="form-control" placeholder="{{friday?.h_end}}" #fe>
+      </div>
+    </div>
+    <button class="btn btn-secondary" (click)="onButtonUpdate(name.value,surname.value,address.value,desc.value);
+     onButtonSchedule(+ms.value, +me.value, +tus.value, +tue.value, +ws.value, +we.value, +ths.value, +the.value, +fs.value, +fe.value)" >Save changes</button>
+  </div>
+</div>

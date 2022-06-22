@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BASE_URL} from "../utility/globals";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {Profession} from "../utility/profession";
 import {User} from "../utility/user";
 
@@ -13,9 +13,24 @@ export class SearchService {
   constructor(private http: HttpClient) {
   }
 
+  public question: any = '';
+  private messageSource = new  BehaviorSubject(this.question);
+  currentQ = this.messageSource.asObservable();
+
+  changeQ(q: string): void {
+    this.messageSource.next(q);
+  }
+
   getAllDoctorsProfessions(): Observable<Profession[]> {
     let url = BASE_URL + '/find/prof/all';
     return this.http.get<Profession[]>(url);
+  }
+
+  getAllDoctorsBy(q: string): Observable<User[]> {
+    let url = BASE_URL + '/find/doc';
+    return this.http.get<User[]>(url,{
+      params: new HttpParams().set('thing', q)
+    });
   }
 
   addProfessionToDoctor(doctor: number, prof: number): void {

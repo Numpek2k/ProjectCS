@@ -6,6 +6,8 @@ import {FormControl, FormGroup, Validators, FormBuilder} from "@angular/forms";
 import {Comment} from "../../utility/comment";
 import {CommentService} from "../../services/comment.service";
 import {RATING_UTILS} from "../../../scripts";
+import {Message} from "../../utility/message";
+import {MessageService} from "../../services/message.service";
 
 @Component({
   selector: 'app-doctor-detail',
@@ -18,6 +20,7 @@ export class DoctorDetailComponent implements OnInit {
               private route: ActivatedRoute,
               private commentService: CommentService,
               public userService: UserService,
+              public messageService: MessageService,
               private router: Router) {
   }
 
@@ -37,7 +40,7 @@ export class DoctorDetailComponent implements OnInit {
   getDate: any;
   id: any;
 
-  get state(){
+  get state() {
     return this.radioButtons.controls['state']
   }
 
@@ -85,10 +88,15 @@ export class DoctorDetailComponent implements OnInit {
       this.commentService.addComment(comment);
     })
 
-    }
-
-  onButtonClick(date: any): void {
-    this.getDate = date
   }
 
+  onButtonSendMessage(message: string): void {
+    if(!this.doctor?.id)
+      return;
+    let mes: Message = {
+      content: message
+    }
+    this.messageService.send(mes, this.doctor?.id);
+    window.location.reload();
+  }
 }

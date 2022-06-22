@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity @Data
@@ -17,9 +18,9 @@ public class Visit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @NotBlank
+    @NotNull
     private Integer h_start;
-    @NotBlank
+    @NotNull
     @Temporal(TemporalType.DATE)
     private Date date;
     private String description;
@@ -27,7 +28,6 @@ public class Visit {
     @ManyToOne
     @JoinColumn(name = "idStatus")
     private Status status;
-
 
     @ManyToOne
     @JoinColumn(name = "idDoctor")

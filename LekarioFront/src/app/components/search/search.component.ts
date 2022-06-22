@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user.service";
 import {User} from "../../utility/user";
+import {SearchService} from "../../services/search.service";
 
 @Component({
   selector: 'app-search',
@@ -10,11 +11,19 @@ import {User} from "../../utility/user";
 export class SearchComponent implements OnInit {
 
   doctors?: User[];
+  question: any
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private searchService: SearchService
+  ) { }
 
   ngOnInit(): void {
-    this.userService.getUsersByProf('Dentist').subscribe(doctors => this.doctors = doctors); //TODO result of search
+    this.searchService.currentQ.subscribe(q => {
+      this.question = q;
+      this.searchService.getAllDoctorsBy(this.question).subscribe(result =>{
+        this.doctors = result;
+      })
+    })
   }
 
 }
